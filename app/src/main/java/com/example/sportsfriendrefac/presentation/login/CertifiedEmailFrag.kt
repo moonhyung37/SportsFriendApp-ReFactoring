@@ -30,6 +30,7 @@ class CertifiedEmailFrag :
     }
 
     override fun init() {
+        (activity as LoginActivity?)?.toolbarTitle?.text = "이메일 인증"
         binding.btnNextEmail.setOnClickListener(this)
         binding.btnReceiveEmail.setOnClickListener(this)
     }

@@ -30,11 +30,15 @@ class RegisterFrag :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
     }
 
 
     override fun init() {
         binding.btnNextRegister.setOnClickListener(this)
+        (activity as LoginActivity?)?.supportActionBar?.show()
+        (activity as LoginActivity?)?.toolbarTitle?.text = "회원정보 입력"
     }
 
     override fun onClick(v: View?) {

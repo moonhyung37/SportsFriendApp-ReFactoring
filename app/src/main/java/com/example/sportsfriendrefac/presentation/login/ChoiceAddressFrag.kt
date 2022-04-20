@@ -34,6 +34,7 @@ class ChoiceAddressFrag :
     }
 
     override fun init() {
+        (activity as LoginActivity?)?.toolbarTitle?.text = "지역 선택"
         binding.tvInterestAddrChoice.setOnClickListener(this)
         binding.tvLiveAddrChoice.setOnClickListener(this)
         binding.btnCompleteAddr.setOnClickListener(this)
