@@ -23,6 +23,17 @@
         <action
             android:id="@+id/action_certifiedEmail_to_choiceAddress"
             app:destination="@id/choiceAddress" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+        <argument
+            android:name="nickname"
+            app:argType="string" />
+        <argument android:name="birthDate"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/choiceAddress"
@@ -32,6 +43,18 @@
         <action
             android:id="@+id/action_choiceAddress_to_login"
             app:destination="@id/login" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+        <argument
+            android:name="nickname"
+            app:argType="string" />
+        <argument
+            android:name="birthDate"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/login"

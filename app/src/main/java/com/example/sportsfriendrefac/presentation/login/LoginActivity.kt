@@ -33,7 +33,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>
 
         //액션바 타이틀 없애기
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
     }
 
 

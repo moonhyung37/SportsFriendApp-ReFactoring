@@ -10,6 +10,7 @@ import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
 import com.example.sportsfriendrefac.databinding.FragmentLoginBinding
 import com.example.sportsfriendrefac.presentation.bulletin.MainActivity
+import timber.log.Timber
 
 
 // TODO: Rename parameter arguments, choose names that match

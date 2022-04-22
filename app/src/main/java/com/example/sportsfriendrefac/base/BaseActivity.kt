@@ -10,6 +10,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import timber.log.Timber
 
 //1)ViewBinding을 상속하는 객체만 받는다.
 //2)
@@ -19,13 +20,13 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel>
     protected lateinit var binding: T
 
     //추상
-    protected abstract val viewModel: V
+    abstract val viewModel: V
     abstract val TAG: String // 액티비티 태그
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i(TAG, "onCreate")
+        Timber.d("onCreate")
         //엑티비티마다 다른 레이아웃 Id를 입력값으로 받음
         binding = DataBindingUtil.setContentView(this, layoutResId)
     }

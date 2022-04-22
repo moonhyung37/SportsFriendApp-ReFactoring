@@ -1,6 +1,7 @@
 package com.example.sportsfriendrefac.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import timber.log.Timber
 
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int,
@@ -26,9 +28,13 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         //프래그먼트에 필요한 세팅을 하는 메서드
         init()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 
     //프래그먼트마다 상세한 세팅코드가 다르기 때문에 작성함.

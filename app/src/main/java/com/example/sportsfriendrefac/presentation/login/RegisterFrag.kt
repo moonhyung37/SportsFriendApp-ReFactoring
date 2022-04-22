@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
+import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.FragmentLoginBinding
 import com.example.sportsfriendrefac.databinding.FragmentRegisterBinding
 import com.example.sportsfriendrefac.presentation.bulletin.MainActivity
+import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,13 +26,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class RegisterFrag :
-
     BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register),
     View.OnClickListener {
-
+    val user: User? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
     }
 
@@ -46,10 +46,22 @@ class RegisterFrag :
 
 
             binding.btnNextRegister.id -> {
+                //입력한 회원정보
+                val email = binding.edEmailRegister.text.toString()
+                val password = binding.edPwRegister.text.toString()
+                val nickname = binding.edNicknameRegister.text.toString()
+                val birthDate = binding.edUserBirthDateRegister.text.toString()
 
+                //프래그먼트 이동 시 회원정보 전달
                 val action =
-                    RegisterFragDirections.actionRegisterToCertifiedEmail()
-                //Second 프래그먼트 전환
+                    RegisterFragDirections.actionRegisterToCertifiedEmail(
+                        email,
+                        password,
+                        nickname,
+                        birthDate,
+                        )
+
+                //이메일인증 프레그먼트로 이동
                 findNavController().navigate(action)
             }
             else -> {

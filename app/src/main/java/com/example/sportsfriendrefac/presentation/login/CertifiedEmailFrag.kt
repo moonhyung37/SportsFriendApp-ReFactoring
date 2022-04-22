@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
+import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.FragmentCertifiedEmailBinding
 import com.example.sportsfriendrefac.databinding.FragmentRegisterBinding
+import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,27 +24,45 @@ private const val ARG_PARAM2 = "param2"
  * Use the [CertifiedEmailFrag.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CertifiedEmailFrag :
+class CertifiedEmailFrag() :
     BaseFragment<FragmentCertifiedEmailBinding>(R.layout.fragment_certified_email),
     View.OnClickListener {
-
+    var user: User? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun init() {
+        //액션바 타이틀 제목
         (activity as LoginActivity?)?.toolbarTitle?.text = "이메일 인증"
         binding.btnNextEmail.setOnClickListener(this)
         binding.btnReceiveEmail.setOnClickListener(this)
+        val argsUser: CertifiedEmailFragArgs by navArgs()
+        user = User(
+            "",
+            "",
+            "",
+            argsUser.nickname,
+            argsUser.email,
+            argsUser.password,
+            "",
+            argsUser.birthDate,
+            "")
+
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-
             //1)거주지역 선택으로 이동
-            binding.btnNextEmail.id -> {
+            binding.btnNextEmail.id,
+            -> {
                 val action =
-                    CertifiedEmailFragDirections.actionCertifiedEmailToChoiceAddress()
+                    CertifiedEmailFragDirections.actionCertifiedEmailToChoiceAddress(
+                        user!!.email,
+                        user!!.password,
+                        user!!.nickname,
+                        user!!.birth_date
+                    )
                 //Second 프래그먼트 전환
                 findNavController().navigate(action)
             }
