@@ -3,12 +3,15 @@ package com.example.sportsfriendrefac.presentation.login
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
 import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.FragmentChoiceAddressBinding
+import com.example.sportsfriendrefac.presentation.viewModel.LoginViewModel
 import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,6 +29,8 @@ class ChoiceAddressFrag :
     View.OnClickListener {
     var user: User? = null
     var fragmentDialog: DaumAddrFragDialog? = null
+    val viewModel: LoginViewModel by activityViewModels<LoginViewModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,19 +39,21 @@ class ChoiceAddressFrag :
 
 
     override fun init() {
+        //라이브데이터 옵저빙
+        subscribeToLiveData()
+
         //프래그먼트 타이틀
         (activity as LoginActivity?)?.toolbarTitle?.text = "지역 선택"
-
+        //다이얼로그 객체 생성
         fragmentDialog = DaumAddrFragDialog()
         binding.tvInterestAddrChoice.setOnClickListener(this)
         binding.tvLiveAddrChoice.setOnClickListener(this)
         binding.btnCompleteAddr.setOnClickListener(this)
 
-        //라이브데이터 옵저빙
-        subscribeToLiveData()
 
         //입력한 회원정보를 args로 받고 객체에 담음
         val argsUser: ChoiceAddressFragArgs by navArgs()
+
         user = User(
             "",
             "",
@@ -57,7 +64,6 @@ class ChoiceAddressFrag :
             "",
             argsUser.birthDate,
             "")
-
 
         //다이얼로그에서 주소 클릭 시 실행
         //-다이얼로그안에 다음 주소선택 웹뷰가 있음
@@ -78,6 +84,8 @@ class ChoiceAddressFrag :
                 Timber.d("주소: $address")
             }
         })
+
+
     }
 
     override fun onClick(v: View?) {
@@ -90,6 +98,13 @@ class ChoiceAddressFrag :
                 val interestAddr = binding.tvInterestAddrChoice.text.toString()
 
 
+                //거주지역을 입력하지 않은 경우(검사)
+                if (liveAddr.isEmpty()) {
+                    Toast.makeText(activity?.applicationContext, "거주지역을 선택해주세요", Toast.LENGTH_SHORT)
+                        .show()
+                    return
+                }
+
                 //관심지역(선택사항)을 입력하지 않은 경우 구분
                 if (interestAddr.isEmpty()) {
                     user?.address = liveAddr
@@ -98,7 +113,7 @@ class ChoiceAddressFrag :
                 }
 
                 //서버에 회원가입 요청
-                (activity as LoginActivity?)?.viewModel?.requestRegisterUser(User(
+                viewModel.requestRegisterUser(User(
                     //서버에 전달할 회원가입에 필요한 정보
                     "",
                     "",
@@ -109,13 +124,11 @@ class ChoiceAddressFrag :
                     user!!.address,
                     user!!.birth_date,
                     ""))
-
-
             }
 
             //2)거주지역 선택
             binding.tvLiveAddrChoice.id -> {
-
+                //주소검색 다이얼로그 뛰우기
                 (activity as LoginActivity?)?.supportFragmentManager?.let {
                     binding.tvLiveAddrChoice.text = ""
                     fragmentDialog?.showDialog(it, "LiveAddr", 1)
@@ -125,26 +138,29 @@ class ChoiceAddressFrag :
 
             //3)관심지역 선택
             binding.tvInterestAddrChoice.id -> {
+                //주소검색 다이얼로그 뛰우기
                 (activity as LoginActivity?)?.supportFragmentManager?.let {
                     binding.tvInterestAddrChoice.text = ""
                     fragmentDialog?.showDialog(it, "InterestAddr", 2)
                 }
             }
             else -> {
+
             }
         }
-
 
     }
 
     private fun subscribeToLiveData() {
-        (activity as LoginActivity?)?.viewModel?.liveRegister?.observe(this) {
-            //화면전환
-            val action =
-                ChoiceAddressFragDirections.actionChoiceAddressToLogin()
-            findNavController().navigate(action)
+        //로그인 화면으로 이동
+        viewModel.liveUser.observe(viewLifecycleOwner) { event ->
+            Toast.makeText(activity?.applicationContext, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT)
+                .show()
+            event.getContentIfNotHandled()?.let {
+                val action =
+                    ChoiceAddressFragDirections.actionChoiceAddressToLogin()
+                findNavController().navigate(action)
+            }
         }
     }
-
-
 }

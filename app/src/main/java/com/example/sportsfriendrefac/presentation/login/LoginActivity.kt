@@ -1,19 +1,14 @@
 package com.example.sportsfriendrefac.presentation.login
 
 
-import androidx.databinding.DataBindingUtil
-
-
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.LifecycleOwner
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseActivity
 import com.example.sportsfriendrefac.databinding.ActivityLoginBinding
-import com.example.sportsfriendrefac.presentation.bulletin.MainActivity
+import com.example.sportsfriendrefac.presentation.viewModel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +25,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>
         super.onCreate(savedInstanceState)
         toolbarTitle = binding.tvToolbarTitle
         setSupportActionBar(binding.myToolbar)    //툴바 사용 설정
-
         //액션바 타이틀 없애기
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }

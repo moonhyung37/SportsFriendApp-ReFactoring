@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.databinding.FragmentWebViewDaumAddrBinding
 
+/* 회원가입 시 주소검색 웹뷰가 보여지는 다이얼로그 */
 class DaumAddrFragDialog : DialogFragment() {
     var flagAddr: Int? = null
     private var fragmentInterfacer: OnclickListener? = null

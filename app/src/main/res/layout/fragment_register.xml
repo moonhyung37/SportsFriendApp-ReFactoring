@@ -100,19 +100,46 @@
                         android:textStyle="bold" />
 
                     <EditText
+
                         android:id="@+id/ed_pw_Register"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="7.5"
+                        android:layout_weight="6.5"
                         android:hint="영문, 숫자, 특수문자 포함 8자리 이상"
+                        android:inputType="textPassword"
                         android:maxLength="15"
                         android:nextFocusDown="@id/ed_nickname_Register"
-                        android:password="true"
                         android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_searchPw_Register"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:padding="5dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/search_icon" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/tv_check_pw1_message"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:text=""
+                        android:textColor="@color/magnitude9"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -141,6 +168,24 @@
                         android:textSize="15sp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/tv_check_nickname_Join"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:minLines="2"
+                        android:text=""
+                        android:textColor="@color/magnitude9"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -169,6 +214,26 @@
                         android:maxLength="6"
                         android:textSize="15sp" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/tv_check_birthDate"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:minLines="2"
+                        android:text=""
+                        android:textColor="@color/magnitude9"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <androidx.appcompat.widget.LinearLayoutCompat

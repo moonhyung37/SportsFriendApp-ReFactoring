@@ -1,15 +1,14 @@
-package com.example.sportsfriendrefac.domain.useCase
+package com.example.sportsfriendrefac.domain.loginUseCase
 
 import com.example.sportsfriendrefac.data.model.User
-import com.example.sportsfriendrefac.domain.repository.UserRepository
-import com.example.sportsfriendrefac.util.ApiResult
+import com.example.sportsfriendrefac.domain.repository.LoginRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-/* DI로 주입받은 repository 인터페이스 */
-class RegisterUseCase(private val userRepository: UserRepository) {
+
+class CertifiedEmailUseCase(private val loginRepository: LoginRepository) {
 
     //invoke fun -> 클래스 객체 생성시 바로 실행? (확실X)
     operator fun invoke(
@@ -17,16 +16,16 @@ class RegisterUseCase(private val userRepository: UserRepository) {
         user: User,
         scope: CoroutineScope,
         //결과 값(응답)
-        onResult: (ApiResult<User>) -> Unit = {},
+        onResult: (String) -> Unit = {},
     ) {
         //코루틴을 사용해 Retrofit API 통신을 진행
-        scope.launch(Dispatchers.Main) {
+        scope.launch(Dispatchers.IO) {
             //결과값을 반환하기 위해 Deffered 사용
-            val deferred = async(Dispatchers.IO) {
-                userRepository.registerUser(user)
+            val response = async {
+                loginRepository.certifiedEmail(user)
             }
             //결과값 ViewModel에 전송
-            onResult(deferred.await())
+            response.await().data?.let { onResult(it) }
         }
     }
 }

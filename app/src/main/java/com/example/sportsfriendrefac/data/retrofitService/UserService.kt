@@ -5,14 +5,13 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface UserService {
-    //Restful 하게 하려면 path를 입력값에 넣어서 동적으로 변하게 만들어야 함.
+    //1.회원가입
     @Headers(
         "accept: application/json",
         "content-type: application/x-www-form-urlencoded; charset=utf-8"
     )
-    @POST("Ex_project/Ex_retrofit/example2.php")
+    @POST("/sportsRefac/userjoin/{customUri}")
     @FormUrlEncoded
-
     suspend fun registerUserApi(
         //어떤 작업을 할지는 작성되어지지 않음.
         //서버로 보내는 회원정보 데이터
@@ -21,6 +20,53 @@ interface UserService {
         @Field("password") password: String,
         @Field("address") address: String,
         @Field("birthDate") birthDate: String,
+        @Path("customUri", encoded = true) customUri: String,
+    ): Response<String>
+
+
+    //2.이메일 인증번호 발급
+    @Headers(
+        "accept: application/json",
+        "content-type: application/x-www-form-urlencoded; charset=utf-8"
     )
-            : Response<User>
+    @POST("/sportsRefac/userjoin/{customUri}")
+    @FormUrlEncoded
+    suspend fun certifiedEmail(
+        //어떤 작업을 할지는 작성되어지지 않음.
+        //서버로 보내는 회원정보 데이터
+        @Field("email_certified") email: String,
+        @Path("customUri", encoded = true) customUri: String,
+    )
+            : Response<String>
+
+
+    //3.중복검사
+    @Headers(
+        "content-type: application/x-www-form-urlencoded; charset=utf-8"
+    )
+    @POST("/sportsRefac/userjoin/{customUri}")
+    @FormUrlEncoded
+    suspend fun redundancyCheck(
+        //어떤 작업을 할지는 작성되어지지 않음.
+        //서버로 보내는 회원정보 데이터
+        @Field("check_data") check_data: String,
+        @Field("keyword") keyword: String,
+        @Path("customUri", encoded = true) customUri: String,
+    )
+            : Response<String>
+
+    //4.로그인
+    @Headers(
+        "content-type: application/x-www-form-urlencoded; charset=utf-8"
+    )
+    @POST("/sportsRefac/userjoin/{customUri}")
+    @FormUrlEncoded
+    suspend fun login(
+        //어떤 작업을 할지는 작성되어지지 않음.
+        //서버로 보내는 회원정보 데이터
+        @Field("user_email") email: String,
+        @Field("user_pw") passWord: String,
+        @Path("customUri", encoded = true) customUri: String,
+    )
+            : Response<String>
 }

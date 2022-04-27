@@ -10,13 +10,12 @@ open class BaseDataSource {
         return try {
             //성공
             if (response.isSuccessful) {
-                return ApiResult.success("000000", response.body())
+                return ApiResult.success(Constants.SUCCESS_CODE, response.body())
             }
-
             //실패
             else {
-                val code = response.headers()[Constants.RESULT_CODE] ?: ""
-                val message = response.headers()[Constants.RESULT_MESSAGE] ?: ""
+                val code = response.headers()[Constants.Fail_CODE] ?: ""
+                val message = response.headers()[Constants.FAIL_MSG] ?: ""
                 ApiResult.error(code, message)
             }
         } catch (e: Exception) {
