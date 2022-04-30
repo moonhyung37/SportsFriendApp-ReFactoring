@@ -1,6 +1,6 @@
 package com.example.sportsfriendrefac.domain.repository
 
-import com.example.sportsfriendrefac.data.model.User
+import com.example.sportsfriendrefac.domain.model.UserEntity
 import com.example.sportsfriendrefac.util.ApiResult
 
 
@@ -9,14 +9,14 @@ interface LoginRepository {
 
     /* UseCase에 넣는 Repository 추상메서드  */
     //회원가입
-    suspend fun registerUser(user: User): ApiResult<String>
+    suspend fun registerUser(userEntity: UserEntity): ApiResult<String>
 
     //중복검사
     suspend fun redundancyCheck(checkData: String): ApiResult<String>
 
     //이메일 인증
-    suspend fun certifiedEmail(user: User): ApiResult<String>
+    suspend fun certifiedEmail(userEntity: UserEntity): ApiResult<String>
 
     //로그인
-    suspend fun login(user: User): ApiResult<String>
+    suspend fun login(userEntity: UserEntity): ApiResult<String>
 }

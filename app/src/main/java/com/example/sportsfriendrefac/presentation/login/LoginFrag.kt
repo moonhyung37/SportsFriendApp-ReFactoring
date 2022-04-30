@@ -12,14 +12,10 @@ import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
 import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.FragmentLoginBinding
-import com.example.sportsfriendrefac.presentation.bulletin.MainActivity
+import com.example.sportsfriendrefac.domain.model.UserEntity
+import com.example.sportsfriendrefac.presentation.MainActivity
 import com.example.sportsfriendrefac.presentation.viewModel.LoginViewModel
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -71,7 +67,7 @@ class LoginFrag : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login),
 
 
                 //서버에 로그인 요청
-                viewModel.loginCheck(User(
+                viewModel.loginCheck(UserEntity(
                     //서버에 전달할 회원가입에 필요한 정보
                     "",
                     "",

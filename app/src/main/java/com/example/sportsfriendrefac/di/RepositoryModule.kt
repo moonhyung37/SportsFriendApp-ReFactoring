@@ -1,6 +1,6 @@
 package com.example.sportsfriendrefac.di
 
-import com.example.sportsfriendrefac.data.repository.UserRepositoryImpl
+import com.example.sportsfriendrefac.data.repository.LoginRepositoryImpl
 import com.example.sportsfriendrefac.domain.repository.LoginRepository
 import dagger.Binds
 import dagger.Module
@@ -13,5 +13,5 @@ import javax.inject.Singleton
 abstract class RepositoryModule {
     @Singleton
     @Binds
-    abstract fun bindsUserRepository(repository: UserRepositoryImpl): LoginRepository
+    abstract fun bindsUserRepository(repository: LoginRepositoryImpl): LoginRepository
 }

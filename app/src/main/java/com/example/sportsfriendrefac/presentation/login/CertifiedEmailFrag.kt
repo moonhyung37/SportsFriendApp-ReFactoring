@@ -1,10 +1,7 @@
 package com.example.sportsfriendrefac.presentation.login
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -13,9 +10,8 @@ import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
 import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.FragmentCertifiedEmailBinding
-import com.example.sportsfriendrefac.databinding.FragmentRegisterBinding
+import com.example.sportsfriendrefac.domain.model.UserEntity
 import com.example.sportsfriendrefac.presentation.viewModel.LoginViewModel
-import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,9 +34,6 @@ class CertifiedEmailFrag() :
     //회원가입 확인 플래그
     // - 라이브데이터에 옵저빙 되는 것 방지
     var emailNum: String? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun init() {
         //라이브데이터 구독(이메일 인증)
@@ -63,8 +56,6 @@ class CertifiedEmailFrag() :
 
         //입력한 이메일 입력
         binding.tvEmail.text = user?.email
-
-
     }
 
     override fun onClick(v: View?) {
@@ -72,7 +63,20 @@ class CertifiedEmailFrag() :
             //1)다음(지역 선택으로 이동)
             binding.btnNextEmail.id,
             -> {
+/*
+                val action =
+                    CertifiedEmailFragDirections.actionCertifiedEmailToChoiceAddress(
+                        user!!.email,
+                        user!!.password,
+                        user!!.nickname,
+                        user!!.birth_date
+                    )
+                findNavController().navigate(action)*/
+
+                //이메일 인증번호 검사
                 if (emailNum == binding.edCertifiedNumberEmail.text.toString()) {
+
+                    //성공 -> 주소검색 프래그먼트로 이동
                     val action =
                         CertifiedEmailFragDirections.actionCertifiedEmailToChoiceAddress(
                             user!!.email,
@@ -82,28 +86,17 @@ class CertifiedEmailFrag() :
                         )
                     findNavController().navigate(action)
                 } else {
+                    //실패 -
                     Toast.makeText(activity?.applicationContext,
                         "인증번호가 일치하지 않습니다.",
                         Toast.LENGTH_SHORT).show()
                 }
-
-
-                /*    val action =
-                        CertifiedEmailFragDirections.actionCertifiedEmailToChoiceAddress(
-                            user!!.email,
-                            user!!.password,
-                            user!!.nickname,
-                            user!!.birth_date
-                        )
-                    //프레그먼트 전환
-                    findNavController().navigate(action)*/
-
             }
 
             //2)인증번호 보내기
             binding.btnReceiveEmail.id -> {
                 //서버에 회원가입 요청
-                viewModel.certifiedEmail(User(
+                viewModel.certifiedEmail(UserEntity(
                     //서버에 전달할 회원가입에 필요한 정보
                     "",
                     "",
@@ -115,7 +108,6 @@ class CertifiedEmailFrag() :
                     user!!.birth_date,
                     ""))
             }
-
 
             else -> {
             }

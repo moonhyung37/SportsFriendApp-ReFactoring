@@ -1,6 +1,5 @@
 package com.example.sportsfriendrefac.presentation.viewModel
 
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -10,6 +9,7 @@ import com.example.sportsfriendrefac.domain.loginUseCase.CertifiedEmailUseCase
 import com.example.sportsfriendrefac.domain.loginUseCase.LoginUseCase
 import com.example.sportsfriendrefac.domain.loginUseCase.RedundancyUseCase
 import com.example.sportsfriendrefac.domain.loginUseCase.RegisterUseCase
+import com.example.sportsfriendrefac.domain.model.UserEntity
 import com.example.sportsfriendrefac.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -32,19 +32,19 @@ class LoginViewModel @Inject constructor(
 
 
     //회원가입 유스케이스 실행 함수
-    fun requestRegisterUser(user: User) {
+    fun requestRegisterUser(userEntity: UserEntity) {
         //최종적인 API 통신 응답값을 LiveData에 입력
         //-Invoke fun 사용
-        registerUseCase(user, viewModelScope) {
+        registerUseCase(userEntity, viewModelScope) {
             _LiveUser.postValue(Event(it))
         }
     }
 
 
     //이메일 인증 유스케이스 실행 함수
-    fun certifiedEmail(user: User) {
+    fun certifiedEmail(userEntity: UserEntity) {
         //최종적인 API 통신 응답값을 LiveData에 입력
-        certifiedEmail(user, viewModelScope) {
+        certifiedEmail(userEntity, viewModelScope) {
             _LiveUser.postValue(Event(it))
         }
     }
@@ -59,14 +59,13 @@ class LoginViewModel @Inject constructor(
     }
 
     //로그인 유스케이스 실행 함수
-    fun loginCheck(user: User) {
+    fun loginCheck(userEntity: UserEntity) {
         //최종적인 API 통신 응답값을 LiveData에 입력
-        loginUseCase(user, viewModelScope) {
+        loginUseCase(userEntity, viewModelScope) {
             //비동기적인 값을 받음
             _LiveUser.postValue(Event(it))
         }
     }
-
 
 
 }

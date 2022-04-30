@@ -4,5 +4,4 @@ package com.example.sportsfriendrefac.domain.model
 abstract class BaseData {
     abstract var idx: String
     abstract var createdDate: String
-
 }

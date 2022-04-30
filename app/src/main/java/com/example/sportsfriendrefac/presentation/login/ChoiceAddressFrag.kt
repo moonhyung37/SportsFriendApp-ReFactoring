@@ -1,6 +1,7 @@
 package com.example.sportsfriendrefac.presentation.login
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -11,6 +12,7 @@ import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
 import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.FragmentChoiceAddressBinding
+import com.example.sportsfriendrefac.domain.model.UserEntity
 import com.example.sportsfriendrefac.presentation.viewModel.LoginViewModel
 import timber.log.Timber
 
@@ -113,7 +115,7 @@ class ChoiceAddressFrag :
                 }
 
                 //서버에 회원가입 요청
-                viewModel.requestRegisterUser(User(
+                viewModel.requestRegisterUser(UserEntity(
                     //서버에 전달할 회원가입에 필요한 정보
                     "",
                     "",
@@ -154,9 +156,10 @@ class ChoiceAddressFrag :
     private fun subscribeToLiveData() {
         //로그인 화면으로 이동
         viewModel.liveUser.observe(viewLifecycleOwner) { event ->
-            Toast.makeText(activity?.applicationContext, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT)
-                .show()
+            Timber.d("1111")
             event.getContentIfNotHandled()?.let {
+                Toast.makeText(activity?.applicationContext, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT)
+                    .show()
                 val action =
                     ChoiceAddressFragDirections.actionChoiceAddressToLogin()
                 findNavController().navigate(action)

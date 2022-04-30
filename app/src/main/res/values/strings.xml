@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_NextText">다음</string>
     <string name="pw_hint">ex)abcd1234@naver.com</string>
+    <string name="bulletinFragmentTag1">tag_BulletinFrag</string>
+    <string name="friendFragmentTag2">tag_FriendListFrag</string>
+    <string name="chatRoomFragmentTag3">tag_ChatRoomFrag</string>
 </resources>

@@ -56,7 +56,6 @@ class RegisterFrag :
 
             //다음 버튼
             binding.btnNextRegister.id -> {
-                //이메일 중복검사
 
                 //이메일 유효성 검사
                 if (!checkEmailRegex(binding.edEmailRegister.text.toString())) {

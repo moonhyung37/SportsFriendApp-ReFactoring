@@ -14,8 +14,11 @@
         android:theme="@style/Theme.SportsFriendReFac"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.bulletin.MainActivity"
-            android:exported="false" />
+            android:name=".presentation.MainActivity"
+            android:exported="false">
+
+
+        </activity>
         <activity
             android:name=".presentation.login.LoginActivity"
             android:exported="true">
