@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.sportsfriendrefac.App
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
 import com.example.sportsfriendrefac.data.model.User
@@ -15,6 +16,9 @@ import com.example.sportsfriendrefac.databinding.FragmentLoginBinding
 import com.example.sportsfriendrefac.domain.model.UserEntity
 import com.example.sportsfriendrefac.presentation.MainActivity
 import com.example.sportsfriendrefac.presentation.viewModel.LoginViewModel
+import com.example.sportsfriendrefac.util.Constants
+import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 
 
 /**
@@ -34,12 +38,26 @@ class LoginFrag : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login),
 
 
     override fun init() {
+        /*    runBlocking {
+                App.instance.clearDataStore()
+            }*/
+
+        //자동로그인 체크
+        if (viewModel.checkAutoLogin()) {
+            //쉐어드에 저장된 UserId가 있는 경우 메인엑티비티로 이동
+            val intent = Intent(activity?.applicationContext, MainActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
+
         binding.btnLogin.setOnClickListener(this)
         binding.btnRegister.setOnClickListener(this)
         (activity as LoginActivity?)?.supportActionBar?.hide()
 
 
         subscribeToLiveData()
+
+
     }
 
     override fun onClick(v: View?) {
@@ -61,7 +79,6 @@ class LoginFrag : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login),
                         "비밀번호를 입력해주세요 ",
                         Toast.LENGTH_SHORT)
                         .show()
-
                     return
                 }
 
@@ -102,22 +119,23 @@ class LoginFrag : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login),
         viewModel.liveUser.observe(viewLifecycleOwner) { event ->
             //이메일인증 클릭 시에만 실행
             event.getContentIfNotHandled()?.let {
-
                 //이메일 검사
                 if (it.trim() == "이메일불일치") {
-                    Toast.makeText(activity?.applicationContext,
+                    Toast.makeText(App.instance.context(),
                         "이메일이 일치하지 않습니다.",
                         Toast.LENGTH_SHORT).show()
                     return@observe
-
                 }
                 //비밀번호 검사
                 else if (it.trim() == "비밀번호불일치") {
-                    Toast.makeText(activity?.applicationContext,
+                    Toast.makeText(App.instance.context(),
                         "비밀번호가 일치하지 않습니다.",
                         Toast.LENGTH_SHORT).show()
                     return@observe
                 }
+
+                //DataStore에 User정보 저장
+                viewModel.saveUserData(it)
 
                 //로그인 성공시 MainActivity로 이동
                 val intent = Intent(activity?.applicationContext, MainActivity::class.java)

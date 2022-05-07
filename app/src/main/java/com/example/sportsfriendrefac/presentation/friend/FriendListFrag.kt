@@ -1,21 +1,15 @@
 package com.example.sportsfriendrefac.presentation.friend
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
-import com.example.sportsfriendrefac.databinding.FragmentCertifiedEmailBinding
+import com.example.sportsfriendrefac.databinding.FragmentFriendListBinding
 import com.example.sportsfriendrefac.presentation.MainActivity
-import com.example.sportsfriendrefac.presentation.login.LoginActivity
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class FriendListFrag : BaseFragment<FragmentCertifiedEmailBinding>(R.layout.fragment_friend_list) {
+class FriendListFrag : BaseFragment<FragmentFriendListBinding>(R.layout.fragment_friend_list) {
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -31,9 +25,15 @@ class FriendListFrag : BaseFragment<FragmentCertifiedEmailBinding>(R.layout.frag
     }
 
     override fun init() {
-        //프래그먼트 타이틀
-        (activity as MainActivity?)?.toolbarTitle?.text = param1
     }
+
+
+   /* //show, Hidden 이벤트
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+        }
+    }*/
 
     companion object {
         /**

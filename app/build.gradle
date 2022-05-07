@@ -16,7 +16,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -46,6 +46,17 @@ dependencies {
     def lifecycle_version = "2.5.0-beta01"
     def room_version = "2.4.2"
     def nav_version = "2.4.2"
+
+    //코루틴 Call Adapter
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    // LiveData LifeCycle (asLiveData 사용)
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+
+    //글라이드
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    //써클 이미지뷰
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //TimBer
     implementation 'com.jakewharton.timber:timber:5.0.1'

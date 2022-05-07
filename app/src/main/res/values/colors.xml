@@ -47,7 +47,10 @@
     <color name="gray_1">#EDEDED</color>
     <color name="gray_2">#333333</color>
     <color name="gray_3">#E0E0E0</color>
+    <!--투명색-->
     <color name="transparent">#00FF0000</color>
     <!--상단 제목 배경 -->
     <color name="green_top">#27AE60</color>
+
+
 </resources>

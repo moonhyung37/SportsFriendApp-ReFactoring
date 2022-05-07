@@ -21,8 +21,6 @@ abstract class LoginRemoteSource : BaseDataSource() {
 
     //로그인
     abstract suspend fun login(user: User): ApiResult<String>
-
-
 }
 
 class LoginRemoteSourceImpl @Inject constructor(

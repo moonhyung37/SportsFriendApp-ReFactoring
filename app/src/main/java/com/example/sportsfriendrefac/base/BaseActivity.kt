@@ -17,7 +17,7 @@ import timber.log.Timber
 //2)
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel>
 //입력값으로 레이아웃 경로를 입력
-    (@LayoutRes private val layoutResId: Int) : AppCompatActivity()  {
+    (@LayoutRes private val layoutResId: Int) : AppCompatActivity() {
     protected lateinit var binding: T
 
     //추상

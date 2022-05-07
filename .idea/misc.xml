@@ -3,20 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/drawable/bottom_icon_color.xml" value="0.184" />
+        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/drawable/ic_house_solid.xml" value="0.184" />
+        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/drawable/ripple_effect.xml" value="0.207" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/font/text_font.xml" value="0.2515625" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/activity_login.xml" value="0.128" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/activity_main.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/activity_option.xml" value="0.264" />
+        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/activity_user_edit.xml" value="0.3338541666666667" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/activity_web_view_daum_addr.xml" value="0.20572916666666666" />
-        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_bulletin.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_bulletin.xml" value="0.4" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_certified_email.xml" value="0.16" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_chat_room.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_choice_address.xml" value="0.16923076923076924" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_friend_list.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_mypage.xml" value="0.264" />
+        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_option.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_register.xml" value="0.4" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/fragment_web_view_daum_addr.xml" value="0.14864864864864866" />
+        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/layout/rv_item_bulletin.xml" value="0.264" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/menu/actionbar_login.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/menu/main_nav_menu.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/MoonTom/AndroidStudioProjects/TeamNova_Project/SportsFriendReFac/app/src/main/res/menu/toolbar_main.xml" value="0.4" />
       </map>
     </option>
   </component>

@@ -37,7 +37,7 @@ interface UserService {
         @Field("email_certified") email: String,
         @Path("customUri", encoded = true) customUri: String,
     )
-            : Response<String>
+    : Response<String>
 
 
     //3.중복검사
@@ -53,7 +53,7 @@ interface UserService {
         @Field("keyword") keyword: String,
         @Path("customUri", encoded = true) customUri: String,
     )
-            : Response<String>
+    : Response<String>
 
     //4.로그인
     @Headers(
@@ -68,5 +68,5 @@ interface UserService {
         @Field("user_pw") passWord: String,
         @Path("customUri", encoded = true) customUri: String,
     )
-            : Response<String>
+    : Response<String>
 }

@@ -29,9 +29,9 @@ private const val ARG_PARAM2 = "param2"
 class ChoiceAddressFrag :
     BaseFragment<FragmentChoiceAddressBinding>(R.layout.fragment_choice_address),
     View.OnClickListener {
-    var user: User? = null
-    var fragmentDialog: DaumAddrFragDialog? = null
-    val viewModel: LoginViewModel by activityViewModels<LoginViewModel>()
+    private var user: User? = null
+    private var fragmentDialog: DaumAddrFragDialog? = null
+    private val viewModel: LoginViewModel by activityViewModels<LoginViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

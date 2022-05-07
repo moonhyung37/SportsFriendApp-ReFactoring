@@ -9,7 +9,6 @@ data class ApiResult<out T>(
     val data: T?,
     val exception: Exception?,
 ) {
-
     //API 통신 상태를 확인하는 상수
     enum class Status {
         SUCCESS,

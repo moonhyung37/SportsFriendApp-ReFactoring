@@ -2,7 +2,6 @@ package com.example.sportsfriendrefac.data.repository
 
 import com.example.sportsfriendrefac.data.dataSource.LoginRemoteSource
 import com.example.sportsfriendrefac.data.mapper.Mapper
-import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.domain.model.UserEntity
 import com.example.sportsfriendrefac.domain.repository.LoginRepository
 import com.example.sportsfriendrefac.util.ApiResult

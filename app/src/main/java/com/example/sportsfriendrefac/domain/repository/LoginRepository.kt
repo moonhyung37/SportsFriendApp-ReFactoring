@@ -17,6 +17,9 @@ interface LoginRepository {
     //이메일 인증
     suspend fun certifiedEmail(userEntity: UserEntity): ApiResult<String>
 
+    //suspend fun certifiedEmail(userEntity: UserEntity): Flow<List<UserEntity>>
     //로그인
     suspend fun login(userEntity: UserEntity): ApiResult<String>
+
+    //flow 반환
 }

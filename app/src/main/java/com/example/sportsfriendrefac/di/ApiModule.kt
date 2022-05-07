@@ -1,9 +1,11 @@
 package com.example.sportsfriendrefac.di
 
 import android.app.Application
+import com.example.sportsfriendrefac.data.retrofitService.BulletinService
 import com.example.sportsfriendrefac.data.retrofitService.UserService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +13,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -60,15 +63,22 @@ internal object ApiModule {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
+//            .addCallAdapterFactory(CoroutineCallAdapterFactory)
             .client(client)
             .build()
     }
 
-    //API 통신을 통해 가져올 모델의 조건을 정의한 GithubService 객체를
-    //반환하고 retofit 객체를 생성
+    //로그인, 회원가입 관련 API Service 객체
     @Provides
     @Singleton
-    fun provideGithubService(retrofit: Retrofit): UserService {
-        return retrofit.create(UserService::class.java)
-    }
+    fun provideLoginService(retrofit: Retrofit): UserService =
+        retrofit.create(UserService::class.java)
+
+    //모집 글 관련 API Service 객체
+    @Provides
+    @Singleton
+    fun provideBulletinService(retrofit: Retrofit): BulletinService =
+        retrofit.create(BulletinService::class.java)
 }
+
+

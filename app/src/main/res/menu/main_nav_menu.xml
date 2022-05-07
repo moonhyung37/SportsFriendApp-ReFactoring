@@ -2,20 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/bulletinMenu"
-        android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="첫번째"
+        android:id="@+id/bulletinNavMenu"
+        android:icon="@drawable/ic_house_solid"
+        android:title=""
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/friendListMenu"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="두번째"
+        android:id="@+id/friendListNavMenu"
+        android:icon="@drawable/ic_user_group_solid"
+        android:title=""
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/chatRoomMenu"
-        android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="세번째"
+        android:id="@+id/chatRoomNavMenu"
+        android:icon="@drawable/ic_chat_solid"
+        android:title=""
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/mypageNavMenu"
+        android:icon="@drawable/default_image"
+        android:title=""
         app:showAsAction="ifRoom" />
 </menu>

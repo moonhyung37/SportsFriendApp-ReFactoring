@@ -3,9 +3,10 @@
     <dimen name="btnLoginHeight">55dp</dimen>
     <dimen name="LoginEditTextHeight">25dp</dimen>
     <dimen name="actionBarHeight">80dp</dimen>
-    <dimen name="actionBarHeightMain">70dp</dimen>
+    <dimen name="actionBarHeightMain">60dp</dimen>
     <dimen name="btnLoginTextSize">25sp</dimen>
     <dimen name="LoginTextSize">25sp</dimen>
-
-
+    <dimen name="pageDefaultTextSize">16sp</dimen>
+    <dimen name="smallSubjectTextSize">20sp</dimen>
+    <dimen name="bottomNavBarHeight">55dp</dimen>
 </resources>

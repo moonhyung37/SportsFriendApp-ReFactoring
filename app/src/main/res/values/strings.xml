@@ -7,4 +7,5 @@
     <string name="bulletinFragmentTag1">tag_BulletinFrag</string>
     <string name="friendFragmentTag2">tag_FriendListFrag</string>
     <string name="chatRoomFragmentTag3">tag_ChatRoomFrag</string>
+    <string name="myPageFragmentTag">tag_myPageFrag</string>
 </resources>

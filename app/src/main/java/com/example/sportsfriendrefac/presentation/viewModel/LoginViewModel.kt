@@ -3,15 +3,18 @@ package com.example.sportsfriendrefac.presentation.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.sportsfriendrefac.App
 import com.example.sportsfriendrefac.base.BaseViewModel
-import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.domain.loginUseCase.CertifiedEmailUseCase
 import com.example.sportsfriendrefac.domain.loginUseCase.LoginUseCase
 import com.example.sportsfriendrefac.domain.loginUseCase.RedundancyUseCase
 import com.example.sportsfriendrefac.domain.loginUseCase.RegisterUseCase
 import com.example.sportsfriendrefac.domain.model.UserEntity
+import com.example.sportsfriendrefac.util.Constants
 import com.example.sportsfriendrefac.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,6 +34,28 @@ class LoginViewModel @Inject constructor(
         get() = _LiveUser
 
 
+    //DataStore에 회원정보(id, 닉네임, (프로필사진)을 저장
+    fun saveUserData(userData: String) {
+        readUserData()
+
+        val ar_userData = userData.split("@")
+        runBlocking {
+            App.instance.setStringData(Constants.USERIDKEY, ar_userData[0])
+            App.instance.setStringData(Constants.USERNICKNAMEKEY, ar_userData[1])
+            App.instance.setStringData(Constants.USERPROFILEIMGKEY, ar_userData[2])
+        }
+    }
+
+    //DataStore에 회원정보(id, 닉네임, (프로필사진)을 저장
+    fun readUserData() {
+        runBlocking {
+            val id = App.instance.getStringData(Constants.USERIDKEY)
+            val nick = App.instance.getStringData(Constants.USERNICKNAMEKEY)
+            val profileImg = App.instance.getStringData(Constants.USERPROFILEIMGKEY)
+            Timber.d("id: $id nick: $nick profileImg: $profileImg")
+        }
+    }
+
     //회원가입 유스케이스 실행 함수
     fun requestRegisterUser(userEntity: UserEntity) {
         //최종적인 API 통신 응답값을 LiveData에 입력
@@ -39,7 +64,6 @@ class LoginViewModel @Inject constructor(
             _LiveUser.postValue(Event(it))
         }
     }
-
 
     //이메일 인증 유스케이스 실행 함수
     fun certifiedEmail(userEntity: UserEntity) {
@@ -62,10 +86,20 @@ class LoginViewModel @Inject constructor(
     fun loginCheck(userEntity: UserEntity) {
         //최종적인 API 통신 응답값을 LiveData에 입력
         loginUseCase(userEntity, viewModelScope) {
-            //비동기적인 값을 받음
             _LiveUser.postValue(Event(it))
         }
+
+
     }
 
+    //자동 로그인
+    fun checkAutoLogin(): Boolean {
+        var flag = false
+        runBlocking {
+            //null인 경우 false
+            flag = !App.instance.getStringData(Constants.USERIDKEY).isNullOrEmpty()
+        }
+        return flag
 
+    }
 }

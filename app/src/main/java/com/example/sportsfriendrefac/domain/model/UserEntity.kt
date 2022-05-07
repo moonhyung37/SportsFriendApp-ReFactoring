@@ -7,7 +7,7 @@ data class UserEntity(
     var nickname: String,
     var email: String,
     var password: String,
-    var address: String, //관심지역, 거주이역
+    var address: String, //관심지역, 거주지역
     var birth_date: String, //상태메세지
     var content: String, //상태메세지
 ) : BaseData()
