@@ -1,6 +1,5 @@
 package com.example.sportsfriendrefac.presentation.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,17 +7,21 @@ import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseViewModel
 import com.example.sportsfriendrefac.domain.bulletinUseCase.BulletinSelectUseCase
 import com.example.sportsfriendrefac.domain.model.BulletinEntity
+import com.example.sportsfriendrefac.domain.model.UserEntity
+import com.example.sportsfriendrefac.domain.userUseCase.SelectUserUseCase
 import com.example.sportsfriendrefac.util.Event
 import com.example.sportsfriendrefac.util.PageType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import org.json.JSONException
-import org.json.JSONObject
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val bulletinSelectUseCase: BulletinSelectUseCase, //모집글 조회
+    private val selectUserUseCase: SelectUserUseCase, //모집글 조회
 ) : BaseViewModel() {
 
 
@@ -29,7 +32,10 @@ class MainViewModel @Inject constructor(
     //모집글 관련 LiveData
     private val _Live_bulletin = MutableLiveData<Event<List<BulletinEntity>>>()
     val live_bulletin: LiveData<Event<List<BulletinEntity>>> = _Live_bulletin
+    // TODO: LiveData Sealed class 공부
 
+    private val _sharedUser = MutableSharedFlow<EventUser>()
+    val sharedUser = _sharedUser.asSharedFlow()
 
     /*모집 글 정보 조회 관련 코드*/
 
@@ -72,7 +78,26 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    //회원정보 조회 함수
+    fun selectUserData(userId: String) {
+        //최종적인 API 통신 응답값을 LiveData에 입력
+        selectUserUseCase(userId, viewModelScope) {
+            //eventUser객체에 서버에서 받은 데이터를 전달
+            event(EventUser.UserData(it))
+        }
+    }
+
+    //이벤트를 전달해주는 클래스
+    sealed class EventUser {
+        data class UserData(val userEntity: UserEntity) : EventUser()
+    }
 
 
+    //서버에서 보낸 이벤트를 SharedFlow에 전달해주는 메서드
+    private fun event(eventUser: EventUser) {
+        viewModelScope.launch {
+            _sharedUser.emit(eventUser)
+        }
+    }
 
 }

@@ -71,7 +71,7 @@ internal object ApiModule {
     //로그인, 회원가입 관련 API Service 객체
     @Provides
     @Singleton
-    fun provideLoginService(retrofit: Retrofit): UserService =
+    fun provideUserService(retrofit: Retrofit): UserService =
         retrofit.create(UserService::class.java)
 
     //모집 글 관련 API Service 객체
@@ -79,6 +79,7 @@ internal object ApiModule {
     @Singleton
     fun provideBulletinService(retrofit: Retrofit): BulletinService =
         retrofit.create(BulletinService::class.java)
+
 }
 
 

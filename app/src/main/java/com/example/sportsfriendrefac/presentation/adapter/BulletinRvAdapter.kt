@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseDiffCallback
-import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.RvItemBulletinBinding
 import com.example.sportsfriendrefac.domain.model.BulletinEntity
 import com.example.sportsfriendrefac.util.Constants
@@ -66,11 +64,16 @@ class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(B
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: BulletinEntity) {
+            var mainImgUrl = ""
             item.bltn_exer = "관심운동: " + item.bltn_exer
             item.bltn_addr = "동네: " + item.bltn_addr
 
-            //모집 글 이미지
-            val mainImgUrl = parseJsonMainImage(item.bltn_Main_img)
+            //모집 글 이미지가 있는 경우에만
+            //""""가 들어가있는 경우를 제외하기 위해서 length=2 사용
+            if (item.bltn_Main_img.isNotEmpty() && item.bltn_Main_img.length != 2) {
+                mainImgUrl = parseJsonMainImage(item.bltn_Main_img)
+            }
+
             if (mainImgUrl.isNotBlank()) {
 
                 //모집 글 이미지가 있는 경우

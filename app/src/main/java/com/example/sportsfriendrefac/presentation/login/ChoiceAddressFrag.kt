@@ -1,7 +1,6 @@
 package com.example.sportsfriendrefac.presentation.login
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -10,10 +9,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
-import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.FragmentChoiceAddressBinding
 import com.example.sportsfriendrefac.domain.model.UserEntity
-import com.example.sportsfriendrefac.presentation.viewModel.LoginViewModel
+import com.example.sportsfriendrefac.presentation.viewModel.UserViewModel
 import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,9 +27,9 @@ private const val ARG_PARAM2 = "param2"
 class ChoiceAddressFrag :
     BaseFragment<FragmentChoiceAddressBinding>(R.layout.fragment_choice_address),
     View.OnClickListener {
-    private var user: User? = null
+    private var userEntity: UserEntity? = null
     private var fragmentDialog: DaumAddrFragDialog? = null
-    private val viewModel: LoginViewModel by activityViewModels<LoginViewModel>()
+    private val viewModel: UserViewModel by activityViewModels<UserViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +54,7 @@ class ChoiceAddressFrag :
         //입력한 회원정보를 args로 받고 객체에 담음
         val argsUser: ChoiceAddressFragArgs by navArgs()
 
-        user = User(
+        userEntity = UserEntity(
             "",
             "",
             "",
@@ -65,7 +63,9 @@ class ChoiceAddressFrag :
             argsUser.password,
             "",
             argsUser.birthDate,
-            "")
+            "",
+            ""
+        )
 
         //다이얼로그에서 주소 클릭 시 실행
         //-다이얼로그안에 다음 주소선택 웹뷰가 있음
@@ -109,9 +109,9 @@ class ChoiceAddressFrag :
 
                 //관심지역(선택사항)을 입력하지 않은 경우 구분
                 if (interestAddr.isEmpty()) {
-                    user?.address = liveAddr
+                    userEntity?.address = liveAddr
                 } else {
-                    user?.address = "$liveAddr$$interestAddr"
+                    userEntity?.address = "$liveAddr$$interestAddr"
                 }
 
                 //서버에 회원가입 요청
@@ -120,11 +120,12 @@ class ChoiceAddressFrag :
                     "",
                     "",
                     "",
-                    user!!.nickname,
-                    user!!.email,
-                    user!!.password,
-                    user!!.address,
-                    user!!.birth_date,
+                    userEntity!!.nickname,
+                    userEntity!!.email,
+                    userEntity!!.password,
+                    userEntity!!.address,
+                    userEntity!!.birth_date,
+                    "",
                     ""))
             }
 
@@ -156,7 +157,6 @@ class ChoiceAddressFrag :
     private fun subscribeToLiveData() {
         //로그인 화면으로 이동
         viewModel.liveUser.observe(viewLifecycleOwner) { event ->
-            Timber.d("1111")
             event.getContentIfNotHandled()?.let {
                 Toast.makeText(activity?.applicationContext, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT)
                     .show()

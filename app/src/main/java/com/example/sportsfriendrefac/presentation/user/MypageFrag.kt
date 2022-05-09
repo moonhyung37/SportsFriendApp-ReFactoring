@@ -5,12 +5,18 @@ import android.view.View
 
 
 import android.os.Bundle
+import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import com.example.sportsfriendrefac.App
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
 import com.example.sportsfriendrefac.databinding.FragmentMypageBinding
+import com.example.sportsfriendrefac.domain.model.UserEntity
+import com.example.sportsfriendrefac.extension.repeatOnStarted
 import com.example.sportsfriendrefac.presentation.MainActivity
 import com.example.sportsfriendrefac.presentation.login.LoginActivity
+import com.example.sportsfriendrefac.presentation.viewModel.MainViewModel
+import com.example.sportsfriendrefac.util.Constants
 import kotlinx.coroutines.runBlocking
 
 private const val ARG_PARAM1 = "param1"
@@ -23,7 +29,9 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    val viewModel: MainViewModel by activityViewModels<MainViewModel>()
 
+    var userIdx: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -81,18 +89,55 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
         binding.btnDeleteMypage.setOnClickListener(this)
         binding.btnLogoutMypage.setOnClickListener(this)
 
-//        (activity as MainActivity?)?.inVisibleAllToolbarMenu()
         binding.btnDeleteMypage.visibility = View.INVISIBLE
+        //DataStore에 저장된 회원정보 idx
+        userIdx = (activity as MainActivity?)?.userIdx
+        //회원정보 서버에 요청
+        userIdx?.run { viewModel.selectUserData(this) }
+
+        //ViewModel에서 받은 이벤트를 받음.
+        repeatOnStarted {
+            viewModel.sharedUser.collect { event ->
+                handleEvent(event)
+            }
+        }
+
+
+    }
+
+    //viewModel에서 전달한 Event객체에 따라서 값을 처리하는 메서드
+    private fun handleEvent(eventUser: MainViewModel.EventUser) = when (eventUser) {
+
+        is MainViewModel.EventUser.UserData -> setUserDataUi(eventUser.userEntity)
     }
 
 
-    /*   //show, Hidden 이벤트
-       override fun onHiddenChanged(hidden: Boolean) {
-           super.onHiddenChanged(hidden)
-           //화면이 보여질 때
-           if (!hidden) {
-           }
-       }*/
+    //회원정보 UI에 입력하는 메서드ㄹ
+    private fun setUserDataUi(userEntity: UserEntity) {
+        val ar_userAddr = userEntity.address!!.split("@")
+
+
+        //1)생년월일
+        binding.tvUserBirthDateMypage.text = userEntity.birth_date
+        //2)닉네임
+        binding.tvNicknameMypage.text = userEntity.nickname
+        //3)거주지역
+        binding.tvAddrMypage.text = ar_userAddr[0]
+
+        //프로필 이미지가 있을 때만 이미지 로딩
+        if (userEntity.profile_ImgUrl?.isNotEmpty() == true) {
+            //4)프로필 사진
+            activity?.run {
+                Glide.with(this.applicationContext)
+                    .load(Constants.Base_img_url + userEntity.profile_ImgUrl)
+                    .override(500, 500)
+                    .into(binding.ivProfileImgMypage)
+            }
+        }
+
+
+    }
+
 
     companion object {
         /**
@@ -117,3 +162,12 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
 
 
 }
+
+
+/*   //show, Hidden 이벤트
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        //화면이 보여질 때
+        if (!hidden) {
+        }
+    }*/

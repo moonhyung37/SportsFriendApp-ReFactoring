@@ -9,7 +9,6 @@ import retrofit2.Response
 import javax.inject.Inject
 
 abstract class BulletinRemoteSource : BaseDataSource() {
-    //모집글 전체 조회
     abstract suspend fun requestBulletin(): ApiResult<List<Bulletin>>
 }
 

@@ -11,14 +11,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.sportsfriendrefac.App
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
-import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.FragmentLoginBinding
 import com.example.sportsfriendrefac.domain.model.UserEntity
 import com.example.sportsfriendrefac.presentation.MainActivity
-import com.example.sportsfriendrefac.presentation.viewModel.LoginViewModel
+import com.example.sportsfriendrefac.presentation.viewModel.UserViewModel
 import com.example.sportsfriendrefac.util.Constants
-import kotlinx.coroutines.runBlocking
-import timber.log.Timber
 
 
 /**
@@ -30,7 +27,7 @@ import timber.log.Timber
 class LoginFrag : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login),
     View.OnClickListener {
 
-    val viewModel: LoginViewModel by activityViewModels<LoginViewModel>()
+    val viewModel: UserViewModel by activityViewModels<UserViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +35,7 @@ class LoginFrag : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login),
 
 
     override fun init() {
-        /*    runBlocking {
-                App.instance.clearDataStore()
-            }*/
+
 
         //자동로그인 체크
         if (viewModel.checkAutoLogin()) {
@@ -84,17 +79,10 @@ class LoginFrag : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login),
 
 
                 //서버에 로그인 요청
-                viewModel.loginCheck(UserEntity(
-                    //서버에 전달할 회원가입에 필요한 정보
-                    "",
-                    "",
-                    "",
-                    "",
-                    inputEmail,
-                    inputPw,
-                    "",
-                    "",
-                    ""))
+                viewModel.loginCheck(
+                    inputEmail, //입력한 이메일
+                    inputPw, //입력한 비밀번호
+                )
             }
 
             //2)회원가입 버튼
@@ -115,6 +103,7 @@ class LoginFrag : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login),
 
     }
 
+    //ViewModel에서 오는 이벤트를 감지 (로그인)
     private fun subscribeToLiveData() {
         viewModel.liveUser.observe(viewLifecycleOwner) { event ->
             //이메일인증 클릭 시에만 실행
@@ -133,6 +122,7 @@ class LoginFrag : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login),
                         Toast.LENGTH_SHORT).show()
                     return@observe
                 }
+
 
                 //DataStore에 User정보 저장
                 viewModel.saveUserData(it)

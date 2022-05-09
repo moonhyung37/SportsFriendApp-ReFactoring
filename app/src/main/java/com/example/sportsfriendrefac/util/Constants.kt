@@ -22,7 +22,9 @@ object Constants {
     const val USERNICKNAMEKEY = "USERNICKNAMEKEY"
     const val USERPROFILEIMGKEY = "USERPROFILEIMGKEY"
 
-    const val SELECTKEY = "SELECTKEY"
+    //로그인 -> 모집 글로 이동시 인텐트로 전달하는 유저정보 키
+    //-userID, userNick, userProfileImg
+//    const val USERDATAKEY = "USERDATAKEY"
 
     //기본 이미지 경로
     const val Base_img_url: String = "http://3.37.253.243/sports_friend/app_image/"

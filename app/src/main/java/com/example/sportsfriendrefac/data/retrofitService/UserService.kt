@@ -37,7 +37,7 @@ interface UserService {
         @Field("email_certified") email: String,
         @Path("customUri", encoded = true) customUri: String,
     )
-    : Response<String>
+            : Response<String>
 
 
     //3.중복검사
@@ -53,7 +53,7 @@ interface UserService {
         @Field("keyword") keyword: String,
         @Path("customUri", encoded = true) customUri: String,
     )
-    : Response<String>
+            : Response<String>
 
     //4.로그인
     @Headers(
@@ -68,5 +68,17 @@ interface UserService {
         @Field("user_pw") passWord: String,
         @Path("customUri", encoded = true) customUri: String,
     )
-    : Response<String>
+            : Response<String>
+
+
+    //회원정보 조회
+    @POST("/sportsRefac/userjoin/{customUri}")
+    @FormUrlEncoded
+    suspend fun selectUserData(
+        //어떤 작업을 할지는 작성되어지지 않음.
+        //서버로 보내는 회원정보 데이터
+        @Field("userId") idx: String,
+        @Path("customUri", encoded = true) customUri: String,
+    )
+            : Response<User.UserSelect>
 }

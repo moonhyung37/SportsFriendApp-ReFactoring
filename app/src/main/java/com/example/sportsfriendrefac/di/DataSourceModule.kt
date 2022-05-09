@@ -19,7 +19,7 @@ abstract class DataSourceModule {
     @Singleton
     @Binds
     //로그인, 회원가입 관련 DataSource
-    abstract fun bindLoginRemoteService(remoteSource: LoginRemoteSourceImpl):
+    abstract fun bindUserRemoteService(remoteSource: LoginRemoteSourceImpl):
             LoginRemoteSource
 
     @Singleton

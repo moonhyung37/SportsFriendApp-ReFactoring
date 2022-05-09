@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import com.example.sportsfriendrefac.App
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseActivity
 import com.example.sportsfriendrefac.databinding.ActivityMainBinding
@@ -18,6 +20,8 @@ import com.example.sportsfriendrefac.presentation.viewModel.MainViewModel
 import com.example.sportsfriendrefac.util.Constants
 import com.example.sportsfriendrefac.util.PageType
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 import java.lang.ref.WeakReference
 
 
@@ -28,70 +32,34 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>
     override val viewModel: MainViewModel by viewModels()
     override val TAG: String
         get() = "MainActivity"
-    var toolbarTitle: TextView? = null
-    var selectIntentData: String? = null
-    var selectOption: String? = null
+
+    //회원정보 배열
+    var userIdx: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         binding.vm = viewModel
-        selectOption = "MYPAGE"
-        //intent변수는 따로 선언안 해주어도 사용가능
-        if (intent.hasExtra(Constants.SELECTKEY)) {
-            selectIntentData = intent.getStringExtra(Constants.SELECTKEY).toString()
-        }
 
-
+        //바텀네비게이션 이동 이벤트를 감지
         viewModel.live_pageType.observe(this) {
             //선택한 프래그먼트의 PageType을 반환
             changeFragment(it)
         }
 
-        binding.bnvMain.run {
-            setOnItemSelectedListener {
-                when (it.itemId) {
-
-                    R.id.bulletinNavMenu -> {
-                        //유저정보 수정 -> 메인엑티비티로 이동한 경우
-
-
-                        viewModel.setCurrentPage(it.itemId)
-                    }
-
-                    R.id.friendListNavMenu -> {
-                        viewModel.setCurrentPage(it.itemId)
-
-                    }
-
-                    R.id.chatRoomNavMenu -> {
-                        viewModel.setCurrentPage(it.itemId)
-
-                    }
-                    R.id.mypageNavMenu -> {
-                        viewModel.setCurrentPage(it.itemId)
-
-                    }
-                }
-                true
-            }
-
+        runBlocking {
+            //회원정보 idx
+            userIdx = App.instance.getStringData(Constants.USERIDKEY)
         }
+
     }
 
-    /* 프래그먼트 바텀내비게이션 함수 */
+    /* 프래그먼트 바텀내비게이션 함수
+    *  -프래그먼트 재생성 관련 메모리 낭비를 줄이기위해 사용
+    * */
     //프래그먼트 전환 함수
     private fun changeFragment(pageType: PageType) {
         //프래그먼트 바텀네비게이션 클릭 변경
-        /*  if (selectIntentData == selectOption) {
-              pageType.tag = resources.getString(R.string.myPageFragmentTag)
-              val weakReference = WeakReference(binding.bnvMain)
-              val view = weakReference.get()
-              view?.menu?.findItem(R.id.mypageNavMenu)?.isChecked = true
-              selectOption = null
-          }*/
-
         val transaction = supportFragmentManager.beginTransaction()
         //프래그먼트에 매니저에 저장된  프래그먼트를 갖고온다.
         var targetFragment = supportFragmentManager.findFragmentByTag(pageType.tag)
@@ -152,9 +120,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>
             }
         }
         return fragment
-
-
     }
-
-
 }
+
+
+/* 바텀네비게이션 아이콘 클릭 처리 관련코드
+  if (selectIntentData == selectOption) {
+            pageType.tag = resources.getString(R.string.myPageFragmentTag)
+            val weakReference = WeakReference(binding.bnvMain)
+            val view = weakReference.get()
+            view?.menu?.findItem(R.id.mypageNavMenu)?.isChecked = true
+            selectOption = null
+        }*/

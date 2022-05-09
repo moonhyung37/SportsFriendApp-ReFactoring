@@ -46,7 +46,7 @@ class App : Application() {
         return instance.applicationContext
     }
 
-
+    /* 내부에 readValue, writeValue가 사용되었음. */
     //읽기
     suspend fun setStringData(key: String, value: String) {
         dataStore.writeValue(stringPreferencesKey(key), value)
@@ -58,13 +58,12 @@ class App : Application() {
         return dataStore.readValue(stringPreferencesKey(key))
     }
 
-    //쓰기
+    //초기화
     suspend fun clearDataStore() {
         return dataStore.storeClear()
     }
 
 
-    //제네릭을 사용해서 Type별로 작성하지 않아도됨.
     suspend inline fun <T : Any> DataStore<Preferences>.readValue(key: Preferences.Key<T>): T? {
         //에러가 생길 시 recoverOrThrow() 실행
         //아닌 경우 [key]로 값 갖고오기

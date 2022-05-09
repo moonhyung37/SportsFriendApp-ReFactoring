@@ -7,25 +7,61 @@ import com.example.sportsfriendrefac.domain.model.UserEntity
 
 
 object Mapper {
+    //1.회원정보조회 관련
     //Entity -> DataModel
-
-    //로그인 회원가입 관련
-    fun convertUser(userEntity: UserEntity): User {
+    fun convertUserSelect(userEntity: UserEntity): User.UserSelect {
         //userEntity null 체크
         return userEntity.run {
-            User(
+            User.UserSelect(
                 userEntity.idx,
                 userEntity.createdDate,
                 userEntity.profile_ImgUrl,
-                userEntity.nickname,
+                userEntity.nickname ?: "",
                 userEntity.email,
                 userEntity.password,
                 userEntity.address,
-                userEntity.birth_date,
-                userEntity.content,
             )
         }
     }
+
+    //DataModel -> Entity
+    fun convertUserEntity(user: User.UserSelect): UserEntity {
+        //userEntity null 체크
+        return user.run {
+            UserEntity(
+                "",
+                "",
+                user.mainImgUrl ?: "",
+                user.nickname,
+                "",
+                "",
+                user.liveAddr + "@" + user.interestAddr,
+                user.birthDate,
+                user.content ?: "",
+                user.flagFriend ?: ""
+            )
+        }
+    }
+
+    //2.회원가입 관련
+    //Entity -> DataModel
+    fun convertUserRegister(userEntity: UserEntity): User.UserRegister {
+        //userEntity null 체크
+        return userEntity.run {
+            User.UserRegister(
+                userEntity.idx,
+                userEntity.createdDate,
+                userEntity.profile_ImgUrl ?: "",
+                userEntity.nickname ?: "",
+                userEntity.email ?: "",
+                userEntity.password ?: "",
+                userEntity.address ?: "",
+                userEntity.birth_date ?: "",
+                userEntity.content ?: ""
+            )
+        }
+    }
+
 
     //모집글 조회관련
     //data: Flow<List<Bulletin>>

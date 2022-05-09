@@ -21,4 +21,6 @@ class BulletinUseCaseModule {
             BulletinSelectUseCase {
         return BulletinSelectUseCase(bulletinRepository)
     }
+
+
 }

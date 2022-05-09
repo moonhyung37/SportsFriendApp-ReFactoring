@@ -8,10 +8,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
-import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.FragmentCertifiedEmailBinding
 import com.example.sportsfriendrefac.domain.model.UserEntity
-import com.example.sportsfriendrefac.presentation.viewModel.LoginViewModel
+import com.example.sportsfriendrefac.presentation.viewModel.UserViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,9 +25,9 @@ private const val ARG_PARAM2 = "param2"
 class CertifiedEmailFrag() :
     BaseFragment<FragmentCertifiedEmailBinding>(R.layout.fragment_certified_email),
     View.OnClickListener {
-    val viewModel: LoginViewModel by activityViewModels<LoginViewModel>()
+    val viewModel: UserViewModel by activityViewModels<UserViewModel>()
 
-    var user: User? = null
+    var userEntity: UserEntity? = null
 
 
     //회원가입 확인 플래그
@@ -43,7 +42,9 @@ class CertifiedEmailFrag() :
         binding.btnNextEmail.setOnClickListener(this)
         binding.btnReceiveEmail.setOnClickListener(this)
         val argsUser: CertifiedEmailFragArgs by navArgs()
-        user = User(
+
+        //회원가입시 입력한 정보
+        userEntity = UserEntity(
             "",
             "",
             "",
@@ -52,10 +53,11 @@ class CertifiedEmailFrag() :
             argsUser.password,
             "",
             argsUser.birthDate,
+            "",
             "")
 
-        //입력한 이메일 입력
-        binding.tvEmail.text = user?.email
+        //입력한 이메일 텍스트뷰에 보여주기
+        binding.tvEmail.text = argsUser.email
     }
 
     override fun onClick(v: View?) {
@@ -63,26 +65,16 @@ class CertifiedEmailFrag() :
             //1)다음(지역 선택으로 이동)
             binding.btnNextEmail.id,
             -> {
-/*
-                val action =
-                    CertifiedEmailFragDirections.actionCertifiedEmailToChoiceAddress(
-                        user!!.email,
-                        user!!.password,
-                        user!!.nickname,
-                        user!!.birth_date
-                    )
-                findNavController().navigate(action)*/
-
                 //이메일 인증번호 검사
                 if (emailNum == binding.edCertifiedNumberEmail.text.toString()) {
 
                     //성공 -> 주소검색 프래그먼트로 이동
                     val action =
                         CertifiedEmailFragDirections.actionCertifiedEmailToChoiceAddress(
-                            user!!.email,
-                            user!!.password,
-                            user!!.nickname,
-                            user!!.birth_date
+                            userEntity?.email ?: "",
+                            userEntity?.password ?: "",
+                            userEntity?.nickname ?: "",
+                            userEntity?.birth_date ?: ""
                         )
                     findNavController().navigate(action)
                 } else {
@@ -93,20 +85,13 @@ class CertifiedEmailFrag() :
                 }
             }
 
-            //2)인증번호 보내기
+            //2)인증번호 받기
             binding.btnReceiveEmail.id -> {
-                //서버에 회원가입 요청
-                viewModel.certifiedEmail(UserEntity(
-                    //서버에 전달할 회원가입에 필요한 정보
-                    "",
-                    "",
-                    "",
-                    user!!.nickname,
-                    user!!.email,
-                    user!!.password,
-                    user!!.address,
-                    user!!.birth_date,
-                    ""))
+                //서버에 인증번호 요청
+                viewModel.certifiedEmail(
+                    //입력한 이메일
+                    binding.tvEmail.text.toString()
+                )
             }
 
             else -> {

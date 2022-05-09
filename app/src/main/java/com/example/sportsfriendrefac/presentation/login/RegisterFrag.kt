@@ -10,7 +10,7 @@ import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseFragment
 import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.databinding.FragmentRegisterBinding
-import com.example.sportsfriendrefac.presentation.viewModel.LoginViewModel
+import com.example.sportsfriendrefac.presentation.viewModel.UserViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +28,7 @@ class RegisterFrag :
     val user: User? = null
     private var minPw: Int? = null  //비밀번호 최소 자릿수
     private var maxPw: Int? = null  //비밀번호 최대 자릿수
-    val viewModel: LoginViewModel by activityViewModels<LoginViewModel>()
+    val viewModel: UserViewModel by activityViewModels<UserViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
