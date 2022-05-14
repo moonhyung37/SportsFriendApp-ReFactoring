@@ -273,13 +273,11 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
     ///이미지 수정에 필요한 읽기, 쓰기 권한 세팅
     private fun setImagePermission(): PermissionListener {
         val permissionListener: PermissionListener = object : PermissionListener {
-            // 어떤 형식을 상속받는 익명 클래스의 객체를 생성하기 위해 다음과 같이 작성합니다  object : 객체명
             override fun onPermissionGranted() {
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                 intent.type = "image/*"
                 //이미지 여러장 선택하기
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
                 activityResultImage.launch(intent)
             }
 
