@@ -21,8 +21,8 @@ class FriendListFrag : BaseFragment<FragmentFriendListBinding>(R.layout.fragment
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
+
 
     override fun init() {
     }

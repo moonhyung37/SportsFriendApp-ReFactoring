@@ -48,4 +48,18 @@ class UserUseCaseModule {
             SelectUserUseCase {
         return SelectUserUseCase(userRepository)
     }
+
+    //회원정보 수정 유스케이스
+    @Provides
+    fun providesUpdateUser(userRepository: UserRepository):
+            UpdateUserUseCase {
+        return UpdateUserUseCase(userRepository)
+    }
+
+    //회원 이미지 수정 유스케이스
+    @Provides
+    fun providesUpdateUserImage(userRepository: UserRepository):
+            UpdateUserImageUseCase {
+        return UpdateUserImageUseCase(userRepository)
+    }
 }

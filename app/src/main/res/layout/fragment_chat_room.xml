@@ -28,7 +28,8 @@
             <TextView
                 style="@style/mainToolBarTitle"
                 android:layout_weight="8.5"
-                android:text="채팅 방" />
+                android:text="채팅 방"
+                android:textSize="@dimen/mainActionBarTextSize" />
 
             <ImageView
                 android:id="@+id/write_chatRoom"

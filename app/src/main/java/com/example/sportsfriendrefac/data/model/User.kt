@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName
 
 
 sealed class User {
-    //회원정보 조회에 사용
-    data class UserSelect(
+    //회원정보 조회, 수정에 사용
+    data class UserData(
         @SerializedName("user_nickname")
         @Expose
         var nickname: String, //닉네임

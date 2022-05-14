@@ -15,14 +15,18 @@ import timber.log.Timber
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int,
 ) : Fragment() {
-    lateinit var binding: B
+    var _binding: B? = null
+    val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+
+
+
         return binding.root
     }
 
@@ -35,6 +39,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _binding = null
     }
 
     //프래그먼트마다 상세한 세팅코드가 다르기 때문에 작성함.

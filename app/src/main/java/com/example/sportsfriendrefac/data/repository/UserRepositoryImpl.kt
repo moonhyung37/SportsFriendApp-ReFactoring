@@ -5,6 +5,7 @@ import com.example.sportsfriendrefac.data.mapper.Mapper
 import com.example.sportsfriendrefac.domain.model.UserEntity
 import com.example.sportsfriendrefac.domain.repository.UserRepository
 import com.example.sportsfriendrefac.util.ApiResult
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(private val remoteSource: LoginRemoteSource) :
@@ -39,6 +40,29 @@ class UserRepositoryImpl @Inject constructor(private val remoteSource: LoginRemo
     //ApiResult -> UserEntity로 변경함
     override suspend fun selectUserUseCase(userId: String): UserEntity {
         return remoteSource.selectUserData(userId).data!!.let { Mapper.convertUserEntity(it) }
+    }
+
+    //회원정보 수정
+    override suspend fun updateUserUseCase(
+        userId: String,
+        nickname: String,
+        birthDate: String,
+        address: String,
+        content: String,
+    ): String {
+        return remoteSource.updateUserData(userId,
+            nickname,
+            birthDate,
+            address,
+            content).data.toString()
+    }
+
+    //회원 이미지 수정
+    override suspend fun updateUserImageUseCase(
+        userId: String,
+        imageBody: MultipartBody.Part,
+    ): String {
+        return remoteSource.updateUserImage(userId, imageBody).toString()
     }
 
 

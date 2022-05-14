@@ -15,9 +15,15 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="dialog_fullscreen" parent="Theme.AppCompat.Dialog">
+    <style name="DaumAddrdialog_fullscreen" parent="Theme.AppCompat.Dialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AddBulletin_fullscreen" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 </resources>

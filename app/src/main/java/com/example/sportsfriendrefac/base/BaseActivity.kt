@@ -33,7 +33,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel>
     }
 
 
-    override fun onRestart() {
+/*    override fun onRestart() {
         super.onRestart()
 //        Log.i(TAG, "onRestart")
     }
@@ -57,11 +57,11 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel>
     override fun onStop() {
         super.onStop()
 //        Log.i(TAG, "onStop")
-    }
+    }*/
 
     override fun onDestroy() {
         super.onDestroy()
-//        Log.i(TAG, "onDestroy")
+
     }
 
 //    abstract fun init()

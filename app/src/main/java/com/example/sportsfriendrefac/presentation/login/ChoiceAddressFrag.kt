@@ -12,7 +12,6 @@ import com.example.sportsfriendrefac.base.BaseFragment
 import com.example.sportsfriendrefac.databinding.FragmentChoiceAddressBinding
 import com.example.sportsfriendrefac.domain.model.UserEntity
 import com.example.sportsfriendrefac.presentation.viewModel.UserViewModel
-import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,10 +79,7 @@ class ChoiceAddressFrag :
                     if (flagAddr == 2) {
                         binding.tvInterestAddrChoice.text = address
                     }
-
                 }
-
-                Timber.d("주소: $address")
             }
         })
 

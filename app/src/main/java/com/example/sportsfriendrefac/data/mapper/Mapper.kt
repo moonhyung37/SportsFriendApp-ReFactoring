@@ -7,12 +7,12 @@ import com.example.sportsfriendrefac.domain.model.UserEntity
 
 
 object Mapper {
-    //1.회원정보조회 관련
+    //1.회원정보조회, 수정에 사용
     //Entity -> DataModel
-    fun convertUserSelect(userEntity: UserEntity): User.UserSelect {
+    fun convertUserData(userEntity: UserEntity): User.UserData {
         //userEntity null 체크
         return userEntity.run {
-            User.UserSelect(
+            User.UserData(
                 userEntity.idx,
                 userEntity.createdDate,
                 userEntity.profile_ImgUrl,
@@ -25,7 +25,10 @@ object Mapper {
     }
 
     //DataModel -> Entity
-    fun convertUserEntity(user: User.UserSelect): UserEntity {
+    //1.회원가입
+    //2.회원정보 조회
+    //3.회원정보 수정에 사용
+    fun convertUserEntity(user: User.UserData): UserEntity {
         //userEntity null 체크
         return user.run {
             UserEntity(
@@ -62,10 +65,30 @@ object Mapper {
         }
     }
 
+    //모집 글 추가, 수정, 조회
+    //DataModel -> Entity
+    fun convertBulletinEntity(bulletin: Bulletin): BulletinEntity {
+        //userEntity null 체크
+        return bulletin.run {
+            BulletinEntity(
+                bltn_idx,
+                bltn_createdDate,
+                user_idx,
+                bltn_title,
+                bltn_content,
+                bltn_img_url ?: "",
+                bltn_exer,
+                bltn_addr,
+                bltn_flag,
+                comment_cnt ?: ""
+            )
+        }
+    }
 
     //모집글 조회관련
+    //Entity -> DataModel
     //data: Flow<List<Bulletin>>
-    fun convertBulletin(response: List<Bulletin>): List<BulletinEntity> {
+    fun convertBulletinList(response: List<Bulletin>): List<BulletinEntity> {
         return response.toDomain()
     }
 
@@ -81,8 +104,9 @@ object Mapper {
                 it.bltn_exer,
                 it.bltn_addr,
                 it.bltn_flag,
-                it.comment_cnt,
+                it.comment_cnt ?: "0",
             )
         }
     }
+
 }

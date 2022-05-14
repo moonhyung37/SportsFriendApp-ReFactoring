@@ -2,9 +2,12 @@ package com.example.sportsfriendrefac
 
 import android.app.Application
 import android.content.Context
+import android.net.Uri
+import android.provider.MediaStore
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.loader.content.CursorLoader
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
@@ -14,8 +17,13 @@ import java.io.IOException
 @HiltAndroidApp
 class App : Application() {
     private val PREF_NAME = "MyDataStore"
-
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(PREF_NAME)
+
+    //바텀내비게이션 프래그먼트 밖에서 모집 글의 수정, 삭제가 발생했을 때 모집 글목록 프래그먼트에 오면 모집글을 갱신시키는 flag
+    //-바텀내비게이션이 재생성 되지 않기 때문에 만들었음.
+    //0번 : 갱신 X
+    //1번 : 갱신 O
+    var flagBulletinSelect = 0
 
 
     /*private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
@@ -101,6 +109,23 @@ class App : Application() {
         } else {
             throw throwable
         }
+    }
+
+    //상대경로 -> 절대경로 변환
+    fun getRealpath(context: Context, contentUri: Uri): String? {
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        var result: String? = null
+
+        val cursorLoader = CursorLoader(context, contentUri, proj, null, null, null)
+        val cursor = cursorLoader.loadInBackground()
+
+        if (cursor != null) {
+            val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            result = cursor.getString(columnIndex)
+            cursor.close()
+        }
+        return result
     }
 
 }

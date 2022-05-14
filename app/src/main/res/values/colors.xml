@@ -23,6 +23,7 @@
     <color name="cardview_shadow_end_color">#03000000</color>
     <color name="cardview_shadow_start_color">#37000000</color>
 
+
     <!-- Color for an earthquake with magnitude 0 and 2 -->
     <color name="magnitude1">#4A7BA7</color>
     <!-- Magnitude circle color for an earthquake with magnitude between 2 and 3 -->
@@ -47,6 +48,7 @@
     <color name="gray_1">#EDEDED</color>
     <color name="gray_2">#333333</color>
     <color name="gray_3">#E0E0E0</color>
+    <color name="gray_4">#808080</color>
     <!--투명색-->
     <color name="transparent">#00FF0000</color>
     <!--상단 제목 배경 -->

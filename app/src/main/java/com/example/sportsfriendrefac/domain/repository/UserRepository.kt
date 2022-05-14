@@ -2,6 +2,7 @@ package com.example.sportsfriendrefac.domain.repository
 
 import com.example.sportsfriendrefac.domain.model.UserEntity
 import com.example.sportsfriendrefac.util.ApiResult
+import okhttp3.MultipartBody
 
 
 /*로그인, 회원가입관련 데이터 로직을 처리하는 리파지토리*/
@@ -22,5 +23,20 @@ interface UserRepository {
 
     //회원정보 조회
     suspend fun selectUserUseCase(userId: String): UserEntity
+
+    //회원정보 수정
+    suspend fun updateUserUseCase(
+        userId: String,
+        nickname: String,
+        birthDate: String,
+        address: String,
+        content: String,
+    ): String
+
+    //회원정보 이미지 수정
+    suspend fun updateUserImageUseCase(
+        userId: String,
+        imageBody: MultipartBody.Part,
+    ): String
 
 }

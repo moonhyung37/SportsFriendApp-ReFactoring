@@ -1,13 +1,8 @@
 package com.example.sportsfriendrefac.presentation
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import com.example.sportsfriendrefac.App
 import com.example.sportsfriendrefac.R
 import com.example.sportsfriendrefac.base.BaseActivity
@@ -21,8 +16,6 @@ import com.example.sportsfriendrefac.util.Constants
 import com.example.sportsfriendrefac.util.PageType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
-import timber.log.Timber
-import java.lang.ref.WeakReference
 
 
 @AndroidEntryPoint
@@ -33,7 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>
     override val TAG: String
         get() = "MainActivity"
 
-    //회원정보 배열
+    //나의 idx
     var userIdx: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,8 +59,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>
 
         //저장된 프래그먼트가 없는 경우
         if (targetFragment == null) {
-
-
             //프래그먼트 생성
             targetFragment = getFragment(pageType)
             //작업을 처리하는 트랜잭션에 추가

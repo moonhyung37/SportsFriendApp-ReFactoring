@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sportsfriendrefac">
-
+    <!-- 인터넷 사용권한 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 읽기 쓰기 권한 및 카메라 권한 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SportsFriendReFac"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.user.UserEditActivity"
+            android:name=".presentation.bulletin.EditBulletinActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".presentation.bulletin.MyBulletinActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.user.OptionActivity"
+            android:name=".presentation.user.UserEditActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.MainActivity"

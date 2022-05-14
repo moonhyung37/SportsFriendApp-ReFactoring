@@ -34,7 +34,8 @@
                 <TextView
                     style="@style/mainToolBarTitle"
                     android:layout_weight="7"
-                    android:text="마이페이지" />
+                    android:text="마이페이지"
+                    android:textSize="@dimen/mainActionBarTextSize" />
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>

@@ -2,6 +2,7 @@ package com.example.sportsfriendrefac.base
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.sportsfriendrefac.domain.model.BaseData
+import com.example.sportsfriendrefac.domain.model.BulletinEntity
 
 //모든 아이템을 상속하는 BaseData를 사용해 아이템을 비교
 internal open class BaseDiffCallback<T : BaseData> : DiffUtil.ItemCallback<T>() {
@@ -15,3 +16,4 @@ internal open class BaseDiffCallback<T : BaseData> : DiffUtil.ItemCallback<T>() 
         return oldItem.hashCode() == newItem.hashCode()
     }
 }
+

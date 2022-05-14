@@ -4,6 +4,7 @@ import com.example.sportsfriendrefac.base.BaseDataSource
 import com.example.sportsfriendrefac.data.model.User
 import com.example.sportsfriendrefac.data.retrofitService.UserService
 import com.example.sportsfriendrefac.util.ApiResult
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 /*외부 API 통신*/
@@ -23,7 +24,22 @@ abstract class LoginRemoteSource : BaseDataSource() {
     abstract suspend fun login(email: String, pw: String): ApiResult<String>
 
     //회원정보 조회
-    abstract suspend fun selectUserData(userId: String): ApiResult<User.UserSelect>
+    abstract suspend fun selectUserData(userId: String): ApiResult<User.UserData>
+
+    //회원정보 수정
+    abstract suspend fun updateUserData(
+        userId: String,
+        nickname: String,
+        birthDate: String,
+        address: String,
+        content: String,
+    ): ApiResult<String>
+
+    //회원 프로필 이미지 수정
+    abstract suspend fun updateUserImage(
+        userId: String,
+        imageBody: MultipartBody.Part,
+    ): ApiResult<String>
 
 }
 
@@ -82,9 +98,33 @@ class LoginRemoteSourceImpl @Inject constructor(
     }
 
     //회원정보 조회
-    override suspend fun selectUserData(userId: String): ApiResult<User.UserSelect> {
+    override suspend fun selectUserData(userId: String): ApiResult<User.UserData> {
         return getResponse(userService.selectUserData(userId, "Select_UserData.php"))
     }
 
+    //회원정보 수정
+    override suspend fun updateUserData(
+        userId: String,
+        nickname: String,
+        birthDate: String,
+        address: String,
+        content: String,
+    ): ApiResult<String> {
+        return getResponse(userService.updateUserData(
+            userId,
+            nickname,
+            birthDate,
+            address,
+            content,
+            "Edit_UserData.php"))
+    }
+
+    //회원 이미지 수정
+    override suspend fun updateUserImage(
+        userId: String,
+        imageBody: MultipartBody.Part,
+    ): ApiResult<String> {
+        return getResponse(userService.updateUserImage(userId, imageBody, "Edit_UserImage.php"))
+    }
 
 }

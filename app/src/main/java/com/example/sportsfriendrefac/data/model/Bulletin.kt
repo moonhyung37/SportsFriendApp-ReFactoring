@@ -43,5 +43,5 @@ data class Bulletin(
 
     @SerializedName("comment_cnt")
     @Expose
-    val comment_cnt: String, //모집 글 댓글 개수
+    val comment_cnt: String? = null ?: "0", //모집 글 댓글 개수
 )

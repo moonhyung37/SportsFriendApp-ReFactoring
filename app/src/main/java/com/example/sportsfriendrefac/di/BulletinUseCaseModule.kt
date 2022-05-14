@@ -1,5 +1,7 @@
 package com.example.sportsfriendrefac.di
 
+import com.example.sportsfriendrefac.domain.bulletinUseCase.BulletinAddEditUseCase
+import com.example.sportsfriendrefac.domain.bulletinUseCase.BulletinDeleteUseCase
 import com.example.sportsfriendrefac.domain.bulletinUseCase.BulletinSelectUseCase
 import com.example.sportsfriendrefac.domain.repository.BulletinRepository
 import dagger.Module
@@ -20,6 +22,20 @@ class BulletinUseCaseModule {
     fun providesSelectBulletin(bulletinRepository: BulletinRepository):
             BulletinSelectUseCase {
         return BulletinSelectUseCase(bulletinRepository)
+    }
+
+    //모집 글 추가 유스케이스
+    @Provides
+    fun providesAddBulletin(bulletinRepository: BulletinRepository):
+            BulletinAddEditUseCase {
+        return BulletinAddEditUseCase(bulletinRepository)
+    }
+
+    //모집 글 삭제 유스케이스
+    @Provides
+    fun providesDeleteBulletin(bulletinRepository: BulletinRepository):
+            BulletinDeleteUseCase {
+        return BulletinDeleteUseCase(bulletinRepository)
     }
 
 

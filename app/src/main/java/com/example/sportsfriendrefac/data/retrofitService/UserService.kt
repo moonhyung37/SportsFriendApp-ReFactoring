@@ -1,6 +1,7 @@
 package com.example.sportsfriendrefac.data.retrofitService
 
 import com.example.sportsfriendrefac.data.model.User
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -80,5 +81,32 @@ interface UserService {
         @Field("userId") idx: String,
         @Path("customUri", encoded = true) customUri: String,
     )
-            : Response<User.UserSelect>
+            : Response<User.UserData>
+
+    //회원정보 수정
+    @POST("/sportsRefac/userjoin/{customUri}")
+    @FormUrlEncoded
+    suspend fun updateUserData(
+        //어떤 작업을 할지는 작성되어지지 않음.
+        //서버로 보내는 회원정보 데이터
+        @Field("user_idx") user_idx: String,
+        @Field("user_nickname") user_nickname: String,
+        @Field("user_birth_date") user_birth_date: String,
+        @Field("user_addr") user_addr: String,
+        @Field("user_content") user_content: String,
+        @Path("customUri", encoded = true) customUri: String,
+    )
+            : Response<String>
+
+    //회원 프로필 이미지 수정
+    @POST("/sportsRefac/userjoin/{customUri}")
+    @Multipart
+    suspend fun updateUserImage(
+        //어떤 작업을 할지는 작성되어지지 않음.
+        //서버로 보내는 회원정보 데이터
+        @Part("user_idx") user_idx: String,
+        @Part file: MultipartBody.Part?, //프로필 이미지
+        @Path("customUri", encoded = true) customUri: String,
+    )
+            : Response<String>
 }

@@ -10,12 +10,16 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.example.sportsfriendrefac.R
-import com.example.sportsfriendrefac.databinding.FragmentWebViewDaumAddrBinding
+import com.example.sportsfriendrefac.databinding.FragmentDialogAddBulletinBinding
+import com.example.sportsfriendrefac.databinding.FragmentDialogWebViewDaumAddrBinding
 
 /* 회원가입 시 주소검색 웹뷰가 보여지는 다이얼로그 */
 class DaumAddrFragDialog : DialogFragment() {
     var flagAddr: Int? = null
     private var fragmentInterfacer: OnclickListener? = null
+
+    private var _binding: FragmentDialogWebViewDaumAddrBinding? = null
+    private val binding get() = _binding!!
 
     //다이얼로그에서 선택한 주소값을 받아오기 위해 작성
     interface OnclickListener {
@@ -27,21 +31,19 @@ class DaumAddrFragDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.dialog_fullscreen)
+        setStyle(STYLE_NO_TITLE, R.style.DaumAddrdialog_fullscreen)
 
-        //false로 설정해 주면 화면밖 혹은 뒤로가기 버튼시 다이얼로그라 dismiss 되지 않는다.
-        isCancelable = true
+        //false로 설정해 주면 화면밖 혹은 뒤로가기 버튼시 다이얼로그가 dismiss 되지 않는다.
+//        isCancelable = true
     }
 
-
-    private lateinit var binding: FragmentWebViewDaumAddrBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentWebViewDaumAddrBinding.inflate(inflater, container, false)
+        _binding = FragmentDialogWebViewDaumAddrBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -75,6 +77,11 @@ class DaumAddrFragDialog : DialogFragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
     //웹뷰에 등록하는 인터페이스
     internal inner class WebAppInterface() {
@@ -94,7 +101,6 @@ class DaumAddrFragDialog : DialogFragment() {
                 fragmentInterfacer?.onButtonClick(data, 2)
             }
             dismiss()
-
         }
     }
 
