@@ -30,7 +30,10 @@ interface BulletinService {
     )
 
     @POST("/sportsRefac/bulletin/{customUri}")
+    @FormUrlEncoded
     suspend fun selectBulletin(
+        @Field("select_flag") select_flag: Int, //1번: 전체조회 2번: 거주지역 3번: 관심지역
+        @Field("address") address: String,
         @Path("customUri", encoded = true) customUri: String,
     ): Response<List<Bulletin>>
 

@@ -15,9 +15,14 @@ class BulletinRepositoryImpl @Inject constructor(private val remoteSource: Bulle
     BulletinRepository {
 
     //모집 글 조회
-    override suspend fun selectBulletin(): Flow<List<BulletinEntity>> {
+    override suspend fun selectBulletin(
+        selectFlag: Int,
+        address: String,
+    ): Flow<List<BulletinEntity>> {
         return flow {
-            remoteSource.selectBulletin().data?.let { Mapper.convertBulletinList(it) }
+            remoteSource.selectBulletin(selectFlag, address).data?.let {
+                Mapper.convertBulletinList(it)
+            }
                 ?.let { emit(it) }
         }
     }

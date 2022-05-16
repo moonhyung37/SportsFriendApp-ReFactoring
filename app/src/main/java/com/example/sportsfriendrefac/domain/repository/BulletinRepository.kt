@@ -8,7 +8,7 @@ interface BulletinRepository {
 
     /* UseCase에 넣는 Repository 추상메서드  */
     //모집 글 조회
-    suspend fun selectBulletin(): Flow<List<BulletinEntity>>
+    suspend fun selectBulletin(selectFlag: Int, address: String): Flow<List<BulletinEntity>>
 
     //내가 작성한 모집 글 조회
     suspend fun selectMyBulletin(myUserIdx: String): Flow<List<BulletinEntity>>

@@ -37,9 +37,9 @@ class UserEditActivity : AppCompatActivity(), View.OnClickListener {
             //생년월일
             binding.tvBirthDateEditMypage.setText(intent.getStringExtra("2").toString())
             //거주지역
-            binding.tvLiveAddrEditMypage.text = intent.getStringExtra("3").toString()
+            binding.tvLiveAddrEditMypage.text = intent.getStringExtra("3")
             //관심지역
-            binding.tvInterestAddrEditMypage.text = intent.getStringExtra("4").toString()
+            binding.tvInterestAddrEditMypage.text = intent.getStringExtra("4") ?: ""
             //상태메세지
             binding.tvContentEditMypage.setText(intent.getStringExtra("5").toString())
         }
@@ -91,6 +91,7 @@ class UserEditActivity : AppCompatActivity(), View.OnClickListener {
 
             //3)관심지역 수정
             binding.tvInterestAddrEditMypage.id -> {
+                binding.tvInterestAddrEditMypage.text = ""
                 //프래그먼트로된 다이얼로그 주소검색 웹뷰 뛰우기
                 supportFragmentManager.run {
                     fragmentDialog?.showDialog(this, "InterestAddr", 2)

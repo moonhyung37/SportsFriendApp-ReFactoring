@@ -33,9 +33,10 @@ class MyBulletinViewModel @Inject constructor(
     val sharedBulletin = _sharedBulletin.asSharedFlow()
 
 
-    //내가 작성한 모집 글 리스트 조회 유스케이스 실행
     fun selectMyBulletin(myUserIdx: String) {
-        bulletinSelectUseCase(2, myUserIdx, viewModelScope) {
+        //flag 2번: 내가 작성한 모집글 유스케이스 실행
+        //selectFlag 1번: 전체 모집글 조회
+        bulletinSelectUseCase(2, 1, "", myUserIdx, viewModelScope) {
             emitEventBulletin(EventMyBulletinSealed.MyBulletinSelect(it))
         }
     }

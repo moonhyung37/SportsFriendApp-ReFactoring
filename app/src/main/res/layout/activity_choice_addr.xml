@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 회원가입 할 때 사용하는 Fragment 주소검색 화면 -->
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
     <!-- <data>
-        <variable
-            name=""
-            type="com.example.Model클래스이름" />
-    </data>-->
+
+         <variable
+             name=""
+             type="com.example.Model클래스이름" />
+     </data>
+ -->
 
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".presentation.login.ChoiceAddressFrag">
-
+        tools:context=".presentation.bulletin.ChoiceAddrActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,11 +110,13 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
                 android:backgroundTint="@color/blue_app_btn"
-                android:text="가입완료"
+                android:text="선택완료"
                 android:textColor="@color/white"
                 android:textSize="@dimen/btnLoginTextSize"
                 android:textStyle="bold" />
 
         </LinearLayout>
-    </LinearLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 </layout>

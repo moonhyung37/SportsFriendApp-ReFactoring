@@ -23,6 +23,12 @@
         android:theme="@style/Theme.SportsFriendReFac"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.bulletin.BulletinInforActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.bulletin.ChoiceAddrActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.bulletin.EditBulletinActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />

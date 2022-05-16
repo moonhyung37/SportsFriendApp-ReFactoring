@@ -13,6 +13,8 @@ class BulletinSelectUseCase(private val bulletinRepository: BulletinRepository) 
     //invoke fun -> 클래스 객체 생성시 바로 실행? (확실X)
     operator fun invoke(
         flag: Int, //1번 전체 모집글 정보 조회 //2번 내가 작성한 모집글 정보 조회
+        selectFlag: Int, //1번: 전체 모집글 조회  2번: 거주지역 해당 모집글 조회 3번: 관심지역 해당 모집글 조회
+        address: String,
         myUserIdx: String,
         scope: CoroutineScope,
         onResult: (List<BulletinEntity>) -> Unit = {},
@@ -22,7 +24,7 @@ class BulletinSelectUseCase(private val bulletinRepository: BulletinRepository) 
             if (flag == 1) {
                 //결과값을 반환하기 위해 Deffered 사용
                 val response = async {
-                    bulletinRepository.selectBulletin()
+                    bulletinRepository.selectBulletin(selectFlag, address)
                 }
                 response.await().collectLatest {
                     onResult(it)

@@ -25,6 +25,11 @@ class App : Application() {
     //1번 : 갱신 O
     var flagBulletinSelect = 0
 
+    //회원정보가 (거주지역, 관심지역) 수정되었을 때 스피너의 정보를 갱신시키기 위해서 사용
+    //0번 : 갱신 X
+    //1번 : 갱신 O
+    var flagUserDataChange = 0
+
 
     /*private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
         name = PREF_NAME,

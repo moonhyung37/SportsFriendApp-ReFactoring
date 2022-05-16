@@ -48,9 +48,13 @@ class MainViewModel @Inject constructor(
     private val _sharedBulletin = MutableSharedFlow<EventBulletinSealed>()
     val sharedBulletin = _sharedBulletin.asSharedFlow()
 
+    //주소정보 스피너에 넣을 리스트
+    val list_addrSpinner by lazy { ArrayList<String>() }
 
-    /*모집 글 정보 조회 관련 코드*/
-
+    //마이페이지에서 거주지역, 관심지역을 변경했을 때 바로 변수를 변경시켜주어야 하기 때문에 사용
+    //-변경 후 바로 모집글 목록 프래그먼트로 이동했을 때 스피너의 내용에 따라 모집글을 조회할 수 있음.
+    var liveAddr = "" // 거주지역
+    var interestAddr = "" //관심지역
 
     /* 바텀네비게이션 프래그먼트 관련 코드 */
     //처음 화면에 보여줄  프레그먼트 세팅
@@ -82,9 +86,9 @@ class MainViewModel @Inject constructor(
     }
 
 
-    //전체 모집 글 정보 리스트 조회 유스케이스 실행
-    fun selectAllBulletin(myUserIdx: String) {
-        bulletinSelectUseCase(1, myUserIdx, viewModelScope) {
+    fun selectAllBulletin(myUserIdx: String, selectFlag: Int, address: String) {
+        //flag 2번: 내가 작성한 모집글 유스케이스 실행
+        bulletinSelectUseCase(1, selectFlag, address, myUserIdx, viewModelScope) {
             emitEventBulletin(EventBulletinSealed.BulletinSelect(it))
         }
     }
@@ -131,11 +135,19 @@ class MainViewModel @Inject constructor(
     }
 
 
-    //회원정보 조회 유스케이스
-    fun selectUserData(userId: String) {
+    //회원정보 조회 유스케이스 (마이페이지에 전달)
+    fun selectUserDataMypage(userId: String) {
         //SharedFlow으로 응답 값 엑티비티에 전달
         selectUserUseCase(userId, viewModelScope) {
             emitEventUser(EventUserSealed.UserData(it))
+        }
+    }
+
+    //회원정보 조회 유스케이스 (모집 글 목록에 전달)
+    fun selectUserDataBulletin(userId: String) {
+        //SharedFlow으로 응답 값 엑티비티에 전달
+        selectUserUseCase(userId, viewModelScope) {
+            emitEventBulletin(EventBulletinSealed.UserData(it))
         }
     }
 
@@ -169,6 +181,10 @@ class MainViewModel @Inject constructor(
             emitEventUser(EventUserSealed.UserUpdate(it))
         }
     }
+/* 하나의 SealedClass로 처리하지 못한 이유
+*  -이벤트를 받는 Fragment에서 is 케이스를 data클래스의 개수만큼 작성해야함.
+*  -그래서 중복적으로 이벤트를 받을 수 있어서 처리안함.
+* */
 
     /*회원정보 처리 관련 이벤트 클래스 */
     //회원정보 관련 이벤트 처리 클래스
@@ -185,12 +201,19 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    /* 모집글 처리 관련 이벤트 클래스 */
+    //    모집글 처리 관련 이벤트 클래스
+    // -회원정보 조회하는 이유 -> 모집글 목록 프래그먼트에서 관심지역, 거주지역 정보를 입력하기 위해서 사용
     sealed class EventBulletinSealed {
         data class BulletinSelect(val List_bulletinEntity: List<BulletinEntity>) :
             EventBulletinSealed()
 
+        //모집 글 추가
         data class BulletinAdd(val bulletinEntity: BulletinEntity) : EventBulletinSealed()
+
+        //회원정보 조회
+        data class UserData(val userEntity: UserEntity) : EventBulletinSealed()
+
+
     }
 
 

@@ -9,6 +9,14 @@
         <item name="android:layout_marginTop">10dp</item>
     </style>
 
+    <style name="bulletinToolBarTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/bulletinActionBarTextSize</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
     <style name="mainToolBarTitle">
 
         <item name="android:layout_width">0dp</item>

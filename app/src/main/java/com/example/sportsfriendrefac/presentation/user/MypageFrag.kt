@@ -79,7 +79,7 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
         userIdx = (activity as MainActivity?)?.userIdx
 
         //회원정보 서버에 요청
-        userIdx?.run { viewModel.selectUserData(this) }
+        userIdx?.run { viewModel.selectUserDataMypage(this) }
 
         //ViewModel에서 보내는 이벤트를 감지.
         //repeateOnstarted블럭 사용시 onStop이 되면 자동으로 이벤트 비활성화
@@ -89,8 +89,8 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
             }
         }
 
-        launchActivityResultUserData()
-        launchActivityResultImage()
+        setActivityResultUpdateUserData()
+        setActivityResultUpdateImage()
         launchActivityResultMyBulletin()
 
         //이미지 읽기, 쓰기 권한 세팅
@@ -120,12 +120,14 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
             //1)회원정보 수정
             binding.tvEditMypage.id -> {
                 //주소 배열(거주지역@관심지역)
-                val ar_userAddr = userEntity?.address!!.split("@")
+                val ar_userAddr = userEntity?.address!!.split("$")
                 val intent = Intent(activity?.applicationContext, UserEditActivity::class.java)
                 intent.putExtra("1", userEntity?.nickname) //닉네임
                 intent.putExtra("2", userEntity?.birth_date) //생년월일
                 intent.putExtra("3", ar_userAddr[0]) //거주지역
-                intent.putExtra("4", ar_userAddr[1]) //관심지역
+                if (ar_userAddr.size == 2) {
+                    intent.putExtra("4", ar_userAddr[1]) //관심지역
+                }
                 intent.putExtra("5", userEntity?.content) //상태메세지
                 activityResultUserData.launch(intent)
             }
@@ -175,8 +177,8 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
             }
     }
 
-    //회원정보 수정 엑티비티에서 결과값 받아오기
-    private fun launchActivityResultUserData() {
+    //수정한 회원정보를 받아오기
+    private fun setActivityResultUpdateUserData() {
         //UserEditActivity(회원정보 수정)엑티비티에서 회원정보 받아오기
         activityResultUserData =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -193,13 +195,44 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
                     //이유: 수정하고 나서 바로 수정을 한번 더 할 때 처음 조회한 회원정보를 사용함으로 수정이 필요
                     userEntity?.nickname = nickname
                     userEntity?.birth_date = birthDate
-                    userEntity?.address = "$liveAddr@$interestAddr"
+                    userEntity?.address = "$liveAddr$$interestAddr"
                     userEntity?.content = content
 
                     //회원정보 Ui 수정
                     binding.tvNicknameMypage.text = nickname
                     binding.tvAddrMypage.text = liveAddr
                     binding.tvUserBirthDateMypage.text = birthDate
+
+                    /* 스피너 수정 */
+                    //-모집 글 목록 프래그먼트에 있는 스피너
+                    viewModel.list_addrSpinner[1] = liveAddr //거주지역
+
+                    //기존에 입력한 관심지역이 있는 경우
+                    if (viewModel.list_addrSpinner.size == 3) {
+                        //관심지역을 입력한 경우
+                        if (interestAddr.isNotEmpty()) {
+                            //관심지역 수정
+                            viewModel.list_addrSpinner[2] = interestAddr //관심지역
+                        }
+                        //관심지역을 입력하지 않은 경우
+                        else {
+                            //관심지역 삭제
+                            viewModel.list_addrSpinner.removeAt(2)
+                        }
+                    }
+                    //기존에 입력한 관심지역이 없는 경우
+                    else if (viewModel.list_addrSpinner.size == 2) {
+                        //관심지역을 새로 입력한 경우
+                        if (interestAddr.isNotEmpty()) {
+                            //관심지역 새로 입력
+                            viewModel.list_addrSpinner.add(interestAddr)  //관심지역
+                        }
+                    }
+
+
+                    //변경한 거주지역, 관심지역 정보를 변수에 저장
+                    viewModel.liveAddr = liveAddr
+                    viewModel.interestAddr = interestAddr
 
                     //회원정보 수정 유스케이스 실행
                     viewModel.updateUserData(UserEntity(
@@ -218,7 +251,8 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
             }
     }
 
-    private fun launchActivityResultImage() {
+    //수정된 회원 프로필 이미지 정보를 받아온다
+    private fun setActivityResultUpdateImage() {
         activityResultImage =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 //엑티비티에서 데이터를 갖고왔을 때만 실행
@@ -246,7 +280,7 @@ class MypageFrag : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage)
 
     //회원정보 UI에 입력하는 메서드
     private fun setUserDataUi(userEntity: UserEntity) {
-        val ar_userAddr = userEntity.address!!.split("@")
+        val ar_userAddr = userEntity.address!!.split("$")
         this.userEntity = userEntity
         //1)생년월일
         binding.tvUserBirthDateMypage.text = userEntity.birth_date

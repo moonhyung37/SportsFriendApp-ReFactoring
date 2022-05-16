@@ -88,7 +88,8 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-
+    //인디케이터
+    implementation 'com.tbuonomo:dotsindicator:4.2'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'

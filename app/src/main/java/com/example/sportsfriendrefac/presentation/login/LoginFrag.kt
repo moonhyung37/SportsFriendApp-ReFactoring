@@ -48,8 +48,6 @@ class LoginFrag : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login),
         binding.btnLogin.setOnClickListener(this)
         binding.btnRegister.setOnClickListener(this)
         (activity as LoginActivity?)?.supportActionBar?.hide()
-
-
         subscribeToLiveData()
 
 

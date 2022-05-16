@@ -33,9 +33,23 @@ class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(B
         fun onItemClick(v: View, data: BulletinEntity, pos: Int)
     }
 
+
     //아이템 클릭 인터페이스를 전달
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
+    }
+
+    //리사이클러뷰의 아이템뷰의 클릭을 감지
+    private var addListener: OnItemAddListener? = null
+
+    //아이템 추가되면 최상단으로 이동하는 인터페이스
+    interface OnItemAddListener {
+        fun onItemAdd()
+    }
+
+    //아이템 클릭 인터페이스를 전달
+    fun setAddClickListener(addListener: OnItemAddListener) {
+        this.addListener = addListener
     }
 
     fun setContext(context: Context) {
@@ -76,6 +90,7 @@ class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(B
 
             1 -> {
                 (holder as BulletinRvAdapter.BulletinViewHolder).bind(getItem(position))
+
             }
 
             else -> {
@@ -89,8 +104,10 @@ class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(B
     //바텀네비게이션 프래그먼트 안에서 실행했기 때문에 별도로 flag에 숫자를 입력하지 않았음.
     fun addItem(item: BulletinEntity) {
         val newList = currentList.toMutableList()
-        newList.add(item)
+        newList.add(0, item)
         submitList(newList)
+
+
     }
 
     //아이템 삭제
@@ -109,6 +126,11 @@ class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(B
         App.instance.flagBulletinSelect = 1
     }
 
+    //아이템 리스트 초기화
+    fun clear() {
+        currentList.toMutableList().clear()
+    }
+
     //1.전체 모집 글 아이템뷰
     inner class BulletinViewHolder(private val binding: RvItemBulletinBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -120,6 +142,7 @@ class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(B
             if (item.bltn_img_url != null && item.bltn_img_url.length != 2) {
                 mainImgUrl = parseJsonMainImage(item.bltn_img_url)
             }
+
 
             //모집 글 이미지가 있는 경우에만
             if (mainImgUrl.isNotBlank()) {
@@ -145,6 +168,11 @@ class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(B
                     //1.리사이클러뷰 수정, 삭제 팝업뷰 옵션버튼
                     listener?.onItemClick(itemView, item, pos)
                 }
+            }
+
+            //마지막 아이템일 때
+            if (adapterPosition == currentList.size - 1) {
+                addListener?.onItemAdd()
             }
         }
     }

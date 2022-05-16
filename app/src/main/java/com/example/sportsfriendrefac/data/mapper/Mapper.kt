@@ -29,6 +29,17 @@ object Mapper {
     //2.회원정보 조회
     //3.회원정보 수정에 사용
     fun convertUserEntity(user: User.UserData): UserEntity {
+
+        //관심운동이 있는 경우
+        var address: String? = null
+        if (user.interestAddr?.isNotEmpty() == true) {
+            address = user.liveAddr + "$" + user.interestAddr
+        }
+        //없는 경우
+        else {
+            address = user.liveAddr
+        }
+
         //userEntity null 체크
         return user.run {
             UserEntity(
@@ -38,7 +49,7 @@ object Mapper {
                 user.nickname,
                 "",
                 "",
-                user.liveAddr + "@" + user.interestAddr,
+                address,
                 user.birthDate,
                 user.content ?: "",
                 user.flagFriend ?: ""

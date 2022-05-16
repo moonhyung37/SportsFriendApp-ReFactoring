@@ -154,7 +154,7 @@ class EditBulletinActivity : AppCompatActivity(), View.OnClickListener {
                             list_imgUri?.add(imageUri)
                         }
 
-                    //2)단일 선택
+                        //2)단일 선택
                     } else {
                         it.data?.data?.let { uri ->
                             //이미지 uri
