@@ -15,8 +15,6 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 class BulletinUseCaseModule {
     //Presentation 계층의 ViewModel에 주입
-
-
     //모집 글 조회 유스케이스
     @Provides
     fun providesSelectBulletin(bulletinRepository: BulletinRepository):

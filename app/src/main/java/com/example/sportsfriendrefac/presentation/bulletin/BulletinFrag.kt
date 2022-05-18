@@ -221,6 +221,7 @@ class BulletinFrag : BaseFragment<FragmentBulletinBinding>(R.layout.fragment_bul
             //모집글 정보 조회
             is MainViewModel.EventBulletinSealed.BulletinSelect -> selectBulletinDataUi(
                 eventBulletinSealed.List_bulletinEntity)
+
             //모집 글 추가
             is MainViewModel.EventBulletinSealed.BulletinAdd -> addBulletinDataUi(
                 eventBulletinSealed.bulletinEntity)
@@ -239,8 +240,6 @@ class BulletinFrag : BaseFragment<FragmentBulletinBinding>(R.layout.fragment_bul
     private fun addBulletinDataUi(bulletinEntity: BulletinEntity) {
         Toast.makeText(activity?.applicationContext, "모집글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
         bulletinRvAdapter?.addItem(bulletinEntity)
-
-
     }
 
 

@@ -13,8 +13,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-    //    Domain 계층의 UseCase안에 주입
-    //-UseCase안에서 Repository 인터페이스를 반환
 
     //로그인, 회원가입 관련 리파지토리
     @Singleton

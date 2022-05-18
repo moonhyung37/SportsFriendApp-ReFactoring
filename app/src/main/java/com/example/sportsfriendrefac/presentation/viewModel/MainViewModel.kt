@@ -212,8 +212,6 @@ class MainViewModel @Inject constructor(
 
         //회원정보 조회
         data class UserData(val userEntity: UserEntity) : EventBulletinSealed()
-
-
     }
 
 

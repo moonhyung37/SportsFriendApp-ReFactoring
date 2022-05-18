@@ -21,7 +21,6 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-
 internal object ApiModule {
     //API 응답요청 시간 설정
     private const val CONNECT_TIMEOUT = 15L
@@ -79,7 +78,6 @@ internal object ApiModule {
     @Singleton
     fun provideBulletinService(retrofit: Retrofit): BulletinService =
         retrofit.create(BulletinService::class.java)
-
 }
 
 

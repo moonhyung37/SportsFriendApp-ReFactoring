@@ -9,8 +9,6 @@ import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
 import javax.inject.Inject
 
-//remoteSource 인터페이스 사용
-//Di로 remoteSource의 구현체를 구현
 class BulletinRepositoryImpl @Inject constructor(private val remoteSource: BulletinRemoteSource) :
     BulletinRepository {
 
@@ -22,8 +20,7 @@ class BulletinRepositoryImpl @Inject constructor(private val remoteSource: Bulle
         return flow {
             remoteSource.selectBulletin(selectFlag, address).data?.let {
                 Mapper.convertBulletinList(it)
-            }
-                ?.let { emit(it) }
+            }?.let { emit(it) }
         }
     }
 
