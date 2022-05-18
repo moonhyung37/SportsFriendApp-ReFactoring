@@ -19,6 +19,7 @@ import com.example.sportsfriendrefac.util.PageType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -85,12 +86,19 @@ class MainViewModel @Inject constructor(
         _Live_pageType.value = pageType
     }
 
-
+    /* UseCase에서 반환받은 Flow로 operator 연산을 처리 */
+    //-operator로 처리한 데이터를 SealedClass에 담아서 SharedFlow에 전송
+    //-Sealed Class를 사용하면 여러개의 데이터 형식도 SharedFlow에서 관찰할 수 있게 해줌.
     fun selectAllBulletin(myUserIdx: String, selectFlag: Int, address: String) {
-        //flag 2번: 내가 작성한 모집글 유스케이스 실행
-        bulletinSelectUseCase(1, selectFlag, address, myUserIdx, viewModelScope) {
-            emitEventBulletin(EventBulletinSealed.BulletinSelect(it))
+        viewModelScope.launch {
+            //1번: 전체 모집글 반환
+            bulletinSelectUseCase(1, selectFlag, address, myUserIdx, viewModelScope) { flow ->
+                flow.collect {
+                    emitEventBulletinFrag(EventBulletinSealed.BulletinSelect(it))
+                }
+            }
         }
+
     }
 
 
@@ -130,7 +138,7 @@ class MainViewModel @Inject constructor(
             bulletinEntity.bltn_addr,
             viewModelScope) {
             //모집글 프래그먼트에 추가한 모집글 정보 전달하기
-            emitEventBulletin(EventBulletinSealed.BulletinAdd(it))
+            emitEventBulletinFrag(EventBulletinSealed.BulletinAdd(it))
         }
     }
 
@@ -139,22 +147,24 @@ class MainViewModel @Inject constructor(
     fun selectUserDataMypage(userId: String) {
         //SharedFlow으로 응답 값 엑티비티에 전달
         selectUserUseCase(userId, viewModelScope) {
-            emitEventUser(EventUserSealed.UserData(it))
+            emitEventMypageFrag(EventUserSealed.UserData(it))
         }
     }
 
     //회원정보 조회 유스케이스 (모집 글 목록에 전달)
+    //-거주지역, 관심지역 정보를 보여주기 위해서
     fun selectUserDataBulletin(userId: String) {
         //SharedFlow으로 응답 값 엑티비티에 전달
         selectUserUseCase(userId, viewModelScope) {
-            emitEventBulletin(EventBulletinSealed.UserData(it))
+            //BulletinFrag에서 사용하는 Sealed클래스
+            emitEventBulletinFrag(EventBulletinSealed.UserData(it))
         }
     }
 
     //회원정보 수정 유스케이스
     fun updateUserData(userEntity: UserEntity) {
         updateUserUseCase(userEntity, viewModelScope) {
-            emitEventUser(EventUserSealed.UserUpdate(it))
+            emitEventMypageFrag(EventUserSealed.UserUpdate(it))
         }
     }
 
@@ -178,7 +188,7 @@ class MainViewModel @Inject constructor(
 
         //회원 이미지 수정 유스케이스 실행
         updateUserImageUseCase(userId, imageBody, viewModelScope) {
-            emitEventUser(EventUserSealed.UserUpdate(it))
+            emitEventMypageFrag(EventUserSealed.UserUpdate(it))
         }
     }
 /* 하나의 SealedClass로 처리하지 못한 이유
@@ -194,14 +204,14 @@ class MainViewModel @Inject constructor(
     }
 
 
-    //서버에서 보낸 이벤트를 SharedFlow에 전달해주는 메서드
-    private fun emitEventUser(eventUserSealed: EventUserSealed) {
+    //회원정보 관련 이벤트를 MypageFragment에 전달
+    private fun emitEventMypageFrag(eventUserSealed: EventUserSealed) {
         viewModelScope.launch {
             _sharedUser.emit(eventUserSealed)
         }
     }
 
-    //    모집글 처리 관련 이벤트 클래스
+    //모집글 관련 + 회원 관련 정보를 BulletinFragment에 전달
     // -회원정보 조회하는 이유 -> 모집글 목록 프래그먼트에서 관심지역, 거주지역 정보를 입력하기 위해서 사용
     sealed class EventBulletinSealed {
         data class BulletinSelect(val List_bulletinEntity: List<BulletinEntity>) :
@@ -216,7 +226,7 @@ class MainViewModel @Inject constructor(
 
 
     //서버에서 보낸 이벤트를 SharedFlow에 전달해주는 메서드
-    private fun emitEventBulletin(eventBulletinSealed: EventBulletinSealed) {
+    private fun emitEventBulletinFrag(eventBulletinSealed: EventBulletinSealed) {
         viewModelScope.launch {
             _sharedBulletin.emit(eventBulletinSealed)
         }

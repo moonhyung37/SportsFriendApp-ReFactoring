@@ -208,11 +208,6 @@ class BulletinFrag : BaseFragment<FragmentBulletinBinding>(R.layout.fragment_bul
         })
 
 
-        bulletinRvAdapter?.setAddClickListener(object : BulletinRvAdapter.OnItemAddListener {
-            override fun onItemAdd() {
-                binding.rvBulletinRv.scrollToPosition(0)
-            }
-        })
     }
 
     //ViewModel에서 보낸 이벤트 처리

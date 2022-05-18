@@ -12,6 +12,7 @@ import com.example.sportsfriendrefac.domain.model.BulletinEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -36,8 +37,10 @@ class MyBulletinViewModel @Inject constructor(
     fun selectMyBulletin(myUserIdx: String) {
         //flag 2번: 내가 작성한 모집글 유스케이스 실행
         //selectFlag 1번: 전체 모집글 조회
-        bulletinSelectUseCase(2, 1, "", myUserIdx, viewModelScope) {
-            emitEventBulletin(EventMyBulletinSealed.MyBulletinSelect(it))
+        bulletinSelectUseCase(2, 1, "", myUserIdx, viewModelScope) { flow ->
+            flow.collect {
+                emitEventBulletin(EventMyBulletinSealed.MyBulletinSelect(it))
+            }
         }
     }
 

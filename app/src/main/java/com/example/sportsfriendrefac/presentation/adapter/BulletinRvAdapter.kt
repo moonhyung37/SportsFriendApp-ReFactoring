@@ -39,18 +39,6 @@ class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(B
         this.listener = listener
     }
 
-    //리사이클러뷰의 아이템뷰의 클릭을 감지
-    private var addListener: OnItemAddListener? = null
-
-    //아이템 추가되면 최상단으로 이동하는 인터페이스
-    interface OnItemAddListener {
-        fun onItemAdd()
-    }
-
-    //아이템 클릭 인터페이스를 전달
-    fun setAddClickListener(addListener: OnItemAddListener) {
-        this.addListener = addListener
-    }
 
     fun setContext(context: Context) {
         this.activityContext = context
@@ -168,11 +156,6 @@ class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(B
                     //1.리사이클러뷰 수정, 삭제 팝업뷰 옵션버튼
                     listener?.onItemClick(itemView, item, pos)
                 }
-            }
-
-            //마지막 아이템일 때
-            if (adapterPosition == currentList.size - 1) {
-                addListener?.onItemAdd()
             }
         }
     }
