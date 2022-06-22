@@ -91,7 +91,7 @@ class BulletinRemoteSourceImpl @Inject constructor(
 
     //모집글 삭제
     override suspend fun deleteBulletin(bltn_idx: String): ApiResult<String> {
-        Timber.d("111")
+        Timber.d("222")
         return getResponse(bulletinService.deleteMyBulletin("delete_bulletin.php", bltn_idx))
     }
 
