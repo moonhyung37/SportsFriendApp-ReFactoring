@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="bulletin"
+            type="com.example.sportsfriendrefac.domain.model.BulletinEntity" />
+    </data>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:layout_marginStart="18.3dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="18.7dp"
+            app:cardCornerRadius="15dp">
+
+            <RelativeLayout
+                android:id="@+id/firstLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_MainImg_url_Item_MyBltn"
+                        android:layout_width="120dp"
+                        android:layout_height="130dp"
+                        android:layout_marginEnd="10dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_launcher" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@+id/iv_MainImg_url_Item_MyBltn"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="8.5"
+                            android:orientation="vertical"
+                            android:weightSum="10">
+
+                            <TextView
+                                android:id="@+id/tv_title_Item_MyBltn"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="4"
+                                android:text="@{bulletin.bltn_title}"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_exer_Item_MyBltn"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2.5"
+                                android:text="@{bulletin.bltn_exer}"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tv_addr_Item_MyBltn"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="3"
+                                android:text="@{bulletin.bltn_addr}"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.5"
+                            android:orientation="vertical"
+                            android:weightSum="10">
+
+                            <RelativeLayout
+                                android:id="@+id/relativelayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="3">
+
+                                <ImageView
+                                    android:id="@+id/myImageView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/circle_comment_cnt" />
+
+                                <TextView
+                                    android:id="@+id/tv_comment_cnt_my_itemBulletin"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignLeft="@id/myImageView"
+                                    android:layout_alignTop="@id/myImageView"
+                                    android:layout_alignRight="@id/myImageView"
+                                    android:layout_alignBottom="@id/myImageView"
+                                    android:gravity="center"
+                                    android:text="@{bulletin.comment_cnt}"
+                                    android:textColor="#000000" />
+
+                            </RelativeLayout>
+
+
+                            <ImageView
+                                android:id="@+id/iv_option_Bulletin_item"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="7"
+                                android:adjustViewBounds="true"
+                                android:padding="10dp"
+                                android:src="@drawable/option_icon" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

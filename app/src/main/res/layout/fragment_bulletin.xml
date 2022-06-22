@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10"
+        tools:context=".presentation.bulletin.BulletinFrag">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="10">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionBarHeightMain"
+                android:weightSum="10">
+
+                <TextView
+                    style="@style/mainToolBarTitle"
+                    android:layout_weight="7"
+                    android:text="모집 글"
+                    android:textSize="@dimen/mainActionBarTextSize" />
+
+                <ImageView
+                    android:id="@+id/iv_search_Bulletin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1.5"
+                    android:adjustViewBounds="true"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/search_icon" />
+
+                <ImageView
+                    android:id="@+id/iv_write_Bulletin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:adjustViewBounds="true"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/add_bulletin_icon" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="10">
+
+            <Spinner
+                android:id="@+id/spinner_Main"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:spinnerMode="dropdown" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8.2">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_bulletinRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/rv_item_bulletin" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

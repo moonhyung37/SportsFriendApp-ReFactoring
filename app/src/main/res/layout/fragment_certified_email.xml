@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <!--     <variable
+                 name=""
+                 type="com.example.Model클래스이름" />-->
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".presentation.login.CertifiedEmailFrag">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="10">
+
+                <!--입력한 핸드폰 번호-->
+                <TextView
+                    android:id="@+id/tv_Email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|center_vertical"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="10">
+
+                <!--입력한 핸드폰 번호-->
+                <TextView
+                    android:id="@+id/tv_send_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|center_vertical"
+                    android:text=""
+                    android:textColor="@color/magnitude9"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="10">
+
+                <!--입력한 핸드폰 번호-->
+                <EditText
+                    android:id="@+id/ed_certified_number_Email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center|center_vertical"
+                    android:hint="인증번호를 입력해주세요 (6자리)"
+                    android:textColor="@color/gray_2"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_receive_Email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btnLoginHeight"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="@color/blue_app_btn"
+                android:text="인증번호 받기"
+                android:textColor="@color/white"
+                android:textSize="@dimen/btnLoginTextSize"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_next_Email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btnLoginHeight"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="@color/blue_app_btn"
+                android:text="다음"
+                android:textColor="@color/white"
+                android:textSize="@dimen/btnLoginTextSize"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

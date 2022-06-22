@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <!--<variable
+            name=""
+            type="com.example.Model클래스이름" />-->
+    </data>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10"
+        tools:context=".presentation.user.MypageFrag">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8.3"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionBarHeightMain"
+                android:weightSum="10">
+
+                <TextView
+                    style="@style/mainToolBarTitle"
+                    android:layout_weight="7"
+                    android:text="마이페이지"
+                    android:textSize="@dimen/mainActionBarTextSize" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="4"
+                    android:orientation="vertical"
+                    android:weightSum="10">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_profile_img_Mypage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="8.5"
+                        android:padding="10dp"
+                        android:src="@drawable/user" />
+
+                    <LinearLayout
+                        android:id="@+id/li_edit_img_Mypage"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="10"
+                            android:ellipsize="end"
+                            android:gravity="right"
+                            android:maxLines="1"
+                            android:text="수정"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/pageDefaultTextSize" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <!--내정보 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="6"
+                    android:orientation="vertical"
+                    android:weightSum="10">
+                    <!--생년월일 텍스트, 수정버튼-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:weightSum="10">
+
+                        <TextView
+                            android:id="@+id/tv_user_birth_date_mypage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:ellipsize="end"
+                            android:gravity=""
+                            android:maxLines="1"
+                            android:text="생년월일"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/pageDefaultTextSize"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_edit_mypage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="3"
+                            android:ellipsize="end"
+                            android:gravity="right"
+                            android:maxLines="1"
+                            android:text="수정"
+                            android:textColor="@color/gray_2"
+                            android:textSize="@dimen/pageDefaultTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3">
+
+                        <TextView
+                            android:id="@+id/tv_nickname_mypage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:ellipsize="end"
+                            android:gravity=""
+                            android:maxLines="1"
+                            android:text="닉네임"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/pageDefaultTextSize"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="5"
+                        android:weightSum="10">
+
+                        <ImageView
+                            android:id="@+id/iv_location_mypage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/location_icon" />
+
+                        <TextView
+                            android:id="@+id/tv_addr_mypage"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="8"
+                            android:ellipsize="end"
+                            android:text="주소"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/pageDefaultTextSize" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="5"
+                android:orientation="vertical"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:id="@+id/li_my_Bulletin_mypage"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2.5"
+                    android:weightSum="10">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:padding="20dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/pencil_icon" />
+                    <!--거주 지역-->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="8"
+                        android:gravity="center|center_vertical"
+                        android:text="내가 작성한 모집 글 확인"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/smallSubjectTextSize"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1.7"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/btn_delete_mypage"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="0.8"
+                android:text="회원탈퇴"
+                android:textColor="@color/black"
+                android:textSize="@dimen/smallSubjectTextSize" />
+
+            <Button
+                android:id="@+id/btn_logout_mypage"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="0.8"
+                android:backgroundTint="@color/blue_app_btn"
+                android:text="로그아웃"
+                android:textColor="@color/white"
+                android:textSize="@dimen/smallSubjectTextSize"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</layout>

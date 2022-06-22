@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <!--<variable
+            name="vm"
+            type="com.example.Model클래스이름" />-->
+    </data>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/li_All_bltn_infor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10"
+        tools:context=".presentation.bulletin.BulletinInforActivity">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar_BulletinInfor"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionBarHeightMain"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <TextView
+                android:id="@+id/tv_toolbar_title"
+                style="@style/bulletinToolBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/sv_bltn_infor"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_profile_img_bltnInfor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:src="@drawable/default_image" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="7"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_nickname_bltnInfor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="닉네임"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/tv_addr_bltnInfor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:gravity="left|center_vertical"
+                        android:text="경기도 부천시 송내동"
+                        android:textColor="@color/blue_app_btn"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/tv_createdDate_bltnInfor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:gravity="right|center_vertical"
+                        android:text="2021.06.28 18:21"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/tv_title_bltnInfor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:gravity="left|center_vertical"
+                        android:text="모집 글 제목"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/tv_content_bltnInfor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity=""
+                        android:text="모집 글 상세내용"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vp2_bltnInfor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:padding="5dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center">
+
+                    <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
+                        android:id="@+id/spring_dots_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:dampingRatio="0.5"
+                        app:dotsCornerRadius="20dp"
+                        app:dotsSize="10dp"
+                        app:dotsSpacing="6dp"
+                        app:dotsStrokeWidth="1dp"
+                        app:stiffness="300" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <EditText
+                        android:id="@+id/ed_comment_bltnInfor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7.5"
+                        android:gravity="left"
+                        android:hint="댓글 입력란(최소 5자 최대 100자)"
+                        android:maxLength="100"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/btn_insertComment_bltnInfor"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:backgroundTint="@color/blue_app_btn"
+                        android:text="작성"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <ImageView
+                        android:id="@+id/iv_refresh_bltnInfor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/refresh_icon" />
+
+                    <TextView
+                        android:id="@+id/tv_commentCnt_bltnInfor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="8"
+                        android:gravity="left"
+                        android:text="0개의 댓글"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="horizontal"
+                    android:paddingBottom="40dp"
+                    android:weightSum="10">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_comment_bltnInfor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!--      <ProgressBar
+                          android:id="@+id/pb_bltn_infor"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content" />-->
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</layout>

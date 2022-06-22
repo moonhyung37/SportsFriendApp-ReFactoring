@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <!-- <data>
+
+         <variable
+             name=""
+             type="com.example.Model클래스이름" />
+     </data>-->
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".presentation.user.UserEditActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionBarHeightMain"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/iv_backicon_EditMyapge"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:adjustViewBounds="true"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/backicon" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:gravity="center|center_vertical"
+                    android:text="회원정보수정"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:orientation="vertical"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight=".8"
+                    android:weightSum="10">
+
+                    <EditText
+                        android:id="@+id/tv_nickname_EditMypage"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="5"
+                        android:background="@color/gray_3"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:hint="닉네임(최대 8자)"
+                        android:maxLength="8"
+                        android:padding="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/tv_birthDate_EditMypage"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="5"
+                        android:background="@color/gray_3"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:hint="생년월일"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:padding="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight=".8">
+
+                    <TextView
+                        android:id="@+id/tv_live_addr_editMypage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/gray_3"
+                        android:ellipsize="end"
+                        android:gravity=""
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:text="동네1: "
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight=".8">
+
+                    <TextView
+                        android:id="@+id/tv_interest_addr_editMypage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/gray_3"
+                        android:ellipsize="end"
+                        android:gravity=""
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:text="동네2: "
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="6">
+
+                    <EditText
+                        android:id="@+id/tv_content_EditMypage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/gray_3"
+                        android:ellipsize="end"
+                        android:gravity="clip_vertical"
+                        android:hint="간략한 자기소개(최대 200자)"
+                        android:maxLength="200"
+                        android:padding="10dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</layout>

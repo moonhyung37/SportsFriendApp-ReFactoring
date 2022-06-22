@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_nav_graph"
+    app:startDestination="@id/login">
+
+    <fragment
+        android:id="@+id/register"
+        android:name="com.example.sportsfriendrefac.presentation.login.RegisterFrag"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_register_to_certifiedEmail"
+            app:destination="@id/certifiedEmail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/certifiedEmail"
+        android:name="com.example.sportsfriendrefac.presentation.login.CertifiedEmailFrag"
+        android:label="fragment_certified_email"
+        tools:layout="@layout/fragment_certified_email">
+        <action
+            android:id="@+id/action_certifiedEmail_to_choiceAddress"
+            app:destination="@id/choiceAddress" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+        <argument
+            android:name="nickname"
+            app:argType="string" />
+        <argument android:name="birthDate"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/choiceAddress"
+        android:name="com.example.sportsfriendrefac.presentation.login.ChoiceAddressFrag"
+        android:label="fragment_choice_address"
+        tools:layout="@layout/fragment_choice_address" >
+        <action
+            android:id="@+id/action_choiceAddress_to_login"
+            app:destination="@id/login" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+        <argument
+            android:name="nickname"
+            app:argType="string" />
+        <argument
+            android:name="birthDate"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.sportsfriendrefac.presentation.login.LoginFrag"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/register" />
+    </fragment>
+</navigation>

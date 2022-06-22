@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--프래그먼트 다이얼로그에 사용  모집 글 생성용 프래그먼트-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10"
+        tools:context=".presentation.bulletin.EditBulletinActivity">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".9"
+            android:background="@color/green_top"
+            android:weightSum="10">
+
+            <ImageView
+                android:id="@+id/iv_backicon_EditBullein"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/backicon" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:gravity="center|center_vertical"
+                android:text="모집 글 수정"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_editBulletin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:backgroundTint="@color/blue_app_btn"
+                android:text="수정"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9.1"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingRight="15dp"
+            android:weightSum="10">
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/li_interest_exer_editBulletin"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/ed_exer_editBulletin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_4"
+                    android:focusable="false"
+                    android:gravity="left|center_vertical"
+                    android:hint="관심운동을 선택해주세요(클릭)"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_4"
+                    android:textSize="16sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/li_location_editBulletin"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <EditText
+                    android:id="@+id/ed_addr_editBulletin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_4"
+                    android:focusable="false"
+                    android:gravity="left|center_vertical"
+                    android:hint="원하는 지역을 선택해주세요(클릭)"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_4"
+                    android:textSize="16sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <EditText
+                    android:id="@+id/ed_title_editBulletin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_4"
+                    android:hint="제목을 입력해주세요(최대 20자)"
+                    android:maxLength="20"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_4"
+                    android:textSize="16sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+
+                <EditText
+                    android:id="@+id/ed_content_editBulletin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/gray_4"
+                    android:hint="상세내용을 입력해주세요(최대 300자)"
+                    android:maxLength="300"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_4"
+                    android:textSize="16sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.2"
+                android:weightSum="10">
+
+                <Button
+                    android:id="@+id/btn_image_editBulletin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:backgroundTint="@color/blue_app_btn"
+                    android:padding="5dp"
+                    android:text="이미지 수정"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:text="-최대 5장까지 등록가능"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:text="-첫번째 이미지가 썸네일 이미지로 등록 됩니다."
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_editBulletin"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="3.5"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
