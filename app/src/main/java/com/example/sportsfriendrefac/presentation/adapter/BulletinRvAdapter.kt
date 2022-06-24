@@ -15,6 +15,7 @@ import com.example.sportsfriendrefac.domain.model.BulletinEntity
 import com.example.sportsfriendrefac.util.Constants
 import org.json.JSONException
 import org.json.JSONObject
+import timber.log.Timber
 
 class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(BaseDiffCallback()) {
     /*   init {
@@ -37,6 +38,7 @@ class BulletinRvAdapter : ListAdapter<BulletinEntity, RecyclerView.ViewHolder>(B
     //아이템 클릭 인터페이스를 전달
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
+        Timber.e("11111")
     }
 
 
