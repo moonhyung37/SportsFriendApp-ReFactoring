@@ -47,7 +47,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-
     }
 
     //객체 생성
