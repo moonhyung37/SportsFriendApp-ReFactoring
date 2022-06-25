@@ -37,7 +37,7 @@ class BulletinAddEditUseCase(private val bulletinRepository: BulletinRepository)
                     interestExer,
                     address)
             }
-            //응답 메세지
+            //응답 메세지 
             onResult(response.await())
         }
     }
